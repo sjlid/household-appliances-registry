@@ -1,14 +1,17 @@
 package com.eevan.registry.entities;
 
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotEmpty;
 import lombok.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@MappedSuperclass
 public abstract class AbstractAppliance {
     @NotEmpty(message = "Product type should not be empty")
     @Column(name = "product_type")
@@ -28,5 +31,6 @@ public abstract class AbstractAppliance {
     @Column(name = "installment_payment")
     private boolean isAbleToInstallment;
 
-    private Map<String, String> goodsPresenting = new HashMap<>();
+    @Transient
+    private List<Object> goodsPresenting = new ArrayList<>();
 }

@@ -1,14 +1,16 @@
 package com.eevan.registry.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "Cleaner")
 public class Cleaner extends AbstractAppliance{
     @Id

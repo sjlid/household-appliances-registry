@@ -1,15 +1,15 @@
 package com.eevan.registry.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "PC")
 public class PC extends AbstractAppliance{
     @Id
