@@ -1,24 +1,50 @@
 package com.eevan.registry.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@Table(name = "Smartphone")
 @Entity
 @Getter
 @Setter
+@Table(name = "Smartphone")
 public class Smartphone extends AbstractAppliance{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
+
+    @NotEmpty(message = "Model's name should not be empty")
+    @Column(name = "model_name")
     private String modelName;
+
+    @NotEmpty(message = "Model's serial should not be empty")
+    @Column(name = "model_serial")
     private String modelSerialNumber;
+
+    @NotEmpty(message = "Model's color should not be empty")
+    @Column(name = "model_color")
     private String modelColor;
+
+    @NotEmpty(message = "Model's size should not be empty")
+    @Column(name = "model_size")
     private int modelSize;
+
+    @NotEmpty(message = "Model's price should not be empty")
+    @Column(name = "model_price")
     private BigDecimal modelPrice;
+
+    @NotEmpty(message = "Model's memory should not be empty")
+    @Column(name = "model_memory")
     private int modelMemory;
+
+    @NotEmpty(message = "Model's memory should not be empty")
+    @Column(name = "model_camera")
     private int modelCamera;
+
+    @Column(name = "model_availability")
     private boolean modelAvailability;
 }
