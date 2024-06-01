@@ -1,8 +1,8 @@
 Предусловие:
-Язык программирования: Java 8
-Frameworks: Spring Boot Starter, Spring Web, Spring JPA, Spring Hibernate
-База данных: Postgres SQL
-Библиотека для генерации документации: springdoc-openapi
+- Java 8
+- Spring Boot Starter, Spring Web, Spring JPA, Spring Hibernate
+- Postgres SQL
+- springdoc-openapi
 
 
 Ход работ:
