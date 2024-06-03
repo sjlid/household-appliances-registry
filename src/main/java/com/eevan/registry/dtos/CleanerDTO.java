@@ -1,15 +1,9 @@
 package com.eevan.registry.dtos;
 
-import com.eevan.registry.entities.AbstractAppliance;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -22,8 +16,8 @@ public class CleanerDTO{
 
     @NotEmpty(message = "Manufacturing company should not be empty")
     private String companyManufacturer;
-    private boolean isAbleToBuyOnline;
-    private boolean isAbleToInstallment;
+    private Boolean isAbleToBuyOnline;
+    private Boolean isAbleToInstallment;
 
     @NotEmpty(message = "Model's name should not be empty")
     private String modelName;
@@ -45,7 +39,5 @@ public class CleanerDTO{
 
     @NotEmpty(message = "Model's work modes should not be empty")
     private int modelWorkModes;
-
-    @Column(name = "model_availability")
-    private boolean modelAvailability;
+    private Boolean modelAvailability;
 }

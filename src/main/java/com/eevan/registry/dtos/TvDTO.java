@@ -2,12 +2,8 @@ package com.eevan.registry.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,8 +16,8 @@ public class TvDTO {
 
     @NotEmpty(message = "Manufacturing company should not be empty")
     private String companyManufacturer;
-    private boolean isAbleToBuyOnline;
-    private boolean isAbleToInstallment;
+    private Boolean isAbleToBuyOnline;
+    private Boolean isAbleToInstallment;
 
     @NotEmpty(message = "Model's name should not be empty")
     private String modelName;
@@ -43,5 +39,5 @@ public class TvDTO {
 
     @NotEmpty(message = "Model's technology should not be empty")
     private String modelTechnology;
-    private boolean modelAvailability;
+    private Boolean modelAvailability;
 }

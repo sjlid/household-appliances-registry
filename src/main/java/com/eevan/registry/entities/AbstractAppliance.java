@@ -1,13 +1,10 @@
 package com.eevan.registry.entities;
 
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -31,6 +28,6 @@ public abstract class AbstractAppliance {
     @Column(name = "installment_payment")
     private boolean isAbleToInstallment;
 
-    @Transient
-    private List<Object> goodsPresenting = new ArrayList<>();
+    @ManyToOne
+    //private ProductFamily productFamily;
 }

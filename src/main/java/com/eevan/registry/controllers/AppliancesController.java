@@ -1,14 +1,13 @@
 package com.eevan.registry.controllers;
 
-import ch.qos.logback.core.net.server.Client;
 import com.eevan.registry.dtos.*;
 import com.eevan.registry.entities.*;
 import com.eevan.registry.services.*;
 import com.eevan.registry.utils.ApplianceErrorResponse;
 import com.eevan.registry.utils.ApplianceNotFoundException;
 import com.eevan.registry.utils.ModelNotCreatedException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -20,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class AppliancesController {
 
     private final CleanerService cleanerService;
@@ -29,17 +29,7 @@ public class AppliancesController {
     private final TVService tvService;
     private final ModelMapper modelMapper;
 
-    @Autowired
-    public AppliancesController(CleanerService cleanerService, FridgeService fridgeService, PCService pcService, SmartphoneService smartphoneService, TVService tvService, ModelMapper modelMapper) {
-        this.cleanerService = cleanerService;
-        this.fridgeService = fridgeService;
-        this.pcService = pcService;
-        this.smartphoneService = smartphoneService;
-        this.tvService = tvService;
-        this.modelMapper = modelMapper;
-    }
-
-    @PostMapping("/add/cleaner")
+    @PostMapping("/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDTO cleanerDTO,
                                                 BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -58,7 +48,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/add/fridge")
+    @PostMapping("/fridges")
     public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDTO fridgeDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -77,7 +67,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/add/pc")
+    @PostMapping("/pcs")
     public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDTO pcDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -96,7 +86,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/add/smartphone")
+    @PostMapping("/smartphones")
     public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDTO smartphoneDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -115,7 +105,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/add/tv")
+    @PostMapping("/tvs")
     public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDTO tvDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
@@ -136,7 +126,6 @@ public class AppliancesController {
 
 
     private Cleaner convertToCleaner(CleanerDTO cleanerDTO) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(cleanerDTO, Cleaner.class);
     }
 
@@ -145,7 +134,6 @@ public class AppliancesController {
     }
 
     private Fridge convertToFridge(FridgeDTO fridgeDTO) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(fridgeDTO, Fridge.class);
     }
 
@@ -154,7 +142,6 @@ public class AppliancesController {
     }
 
     private PC convertToPC(PcDTO pcDTO) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(pcDTO, PC.class);
     }
 
@@ -163,7 +150,6 @@ public class AppliancesController {
     }
 
     private Smartphone convertToSmartphone(SmartphoneDTO smartphoneDTO) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(smartphoneDTO, Smartphone.class);
     }
 
@@ -172,7 +158,6 @@ public class AppliancesController {
     }
 
     private TV convertToTV(TvDTO tvDTO) {
-        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(tvDTO, TV.class);
     }
 
