@@ -17,6 +17,7 @@ public class Cleaner extends AbstractAppliance{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
+
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")
     private String modelName;
