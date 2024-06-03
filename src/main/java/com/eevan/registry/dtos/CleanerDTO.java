@@ -24,5 +24,28 @@ public class CleanerDTO{
     private String companyManufacturer;
     private boolean isAbleToBuyOnline;
     private boolean isAbleToInstallment;
-    private List<Object> goodsPresenting = new ArrayList<>();
+
+    @NotEmpty(message = "Model's name should not be empty")
+    private String modelName;
+
+    @NotEmpty(message = "Model's serial should not be empty")
+    private String modelSerialNumber;
+
+    @NotEmpty(message = "Model's color should not be empty")
+    private String modelColor;
+
+    @NotEmpty(message = "Model's size should not be empty")
+    private int modelSize;
+
+    @NotEmpty(message = "Model's price should not be empty")
+    private BigDecimal modelPrice;
+
+    @NotEmpty(message = "Model's volume should not be empty")
+    private int modelVolume;
+
+    @NotEmpty(message = "Model's work modes should not be empty")
+    private int modelWorkModes;
+
+    @Column(name = "model_availability")
+    private boolean modelAvailability;
 }
