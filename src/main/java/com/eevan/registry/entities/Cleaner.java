@@ -48,4 +48,6 @@ public class Cleaner extends AbstractAppliance{
 
     @Column(name = "model_availability")
     private boolean modelAvailability;
+
+
 }

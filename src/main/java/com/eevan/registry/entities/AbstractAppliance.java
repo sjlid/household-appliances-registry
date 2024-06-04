@@ -3,6 +3,7 @@ package com.eevan.registry.entities;
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import lombok.*;
 
@@ -28,6 +29,6 @@ public abstract class AbstractAppliance {
     @Column(name = "installment_payment")
     private boolean isAbleToInstallment;
 
-    @ManyToOne
-    //private ProductFamily productFamily;
+    @Transient
+    private ProductFamily productFamily;
 }
