@@ -15,7 +15,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +32,18 @@ public class AppliancesController {
     private final SmartphoneService smartphoneService;
     private final TVService tvService;
     private final ModelMapper modelMapper;
+
+    @GetMapping("/products")
+    public List<Object> getAllProducts(){
+        return Stream.of(
+                cleanerService.getAllCleaners(),
+                fridgeService.getAllFridges(),
+                pcService.getAllPcs(),
+                smartphoneService.getAllSmartphones(),
+                tvService.getAllTvs())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
 
     @PostMapping("/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDTO cleanerDTO,

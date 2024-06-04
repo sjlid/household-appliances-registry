@@ -29,7 +29,7 @@ public class PcDTO {
     private String modelColor;
 
     @NotEmpty(message = "Model's size should not be empty")
-    private int modelSize;
+    private String modelSize;
 
     @NotEmpty(message = "Model's price should not be empty")
     private BigDecimal modelPrice;

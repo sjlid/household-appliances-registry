@@ -29,15 +29,15 @@ public class CleanerDTO{
     private String modelColor;
 
     @NotEmpty(message = "Model's size should not be empty")
-    private int modelSize;
+    private String modelSize;
 
     @NotEmpty(message = "Model's price should not be empty")
     private BigDecimal modelPrice;
 
     @NotEmpty(message = "Model's volume should not be empty")
-    private int modelVolume;
+    private float modelVolume;
 
     @NotEmpty(message = "Model's work modes should not be empty")
-    private int modelWorkModes;
+    private String modelWorkModes;
     private Boolean modelAvailability;
 }

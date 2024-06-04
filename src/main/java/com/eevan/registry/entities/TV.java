@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "TV")
+@Table(name = "products")
 public class TV extends AbstractAppliance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class TV extends AbstractAppliance {
 
     @NotEmpty(message = "Model's size should not be empty")
     @Column(name = "model_size")
-    private int modelSize;
+    private String modelSize;
 
     @NotEmpty(message = "Model's price should not be empty")
     @Column(name = "model_price")
