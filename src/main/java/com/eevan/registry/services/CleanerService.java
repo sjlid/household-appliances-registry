@@ -4,6 +4,7 @@ import com.eevan.registry.entities.Cleaner;
 import com.eevan.registry.repos.CleanerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,6 @@ public class CleanerService {
 
     @Transactional(readOnly = true)
     public List<Cleaner> getAllCleaners() {
-        return cleanerRepository.findAll();
+        return cleanerRepository.findCleaner();
     }
 }

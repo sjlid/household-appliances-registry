@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -14,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue(value = "Fridge")
-public class Fridge extends AbstractAppliance{
+public class Fridge extends Product {
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")

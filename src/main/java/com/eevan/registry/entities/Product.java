@@ -10,7 +10,7 @@ import lombok.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Appliance_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "appliance")
-public abstract class AbstractAppliance {
+public abstract class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

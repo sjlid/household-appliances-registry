@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue(value = "PC")
-public class PC extends AbstractAppliance{
+public class PC extends Product {
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")

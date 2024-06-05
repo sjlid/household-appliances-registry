@@ -1,19 +1,24 @@
 package com.eevan.registry.services;
 
+import com.eevan.registry.entities.Cleaner;
+import com.eevan.registry.entities.Product;
 import com.eevan.registry.repos.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 public class ProductService {
-    private final CleanerRepository cleanerRepository;
-    private final FridgeRepository fridgeRepository;
-    private final PCRepository pcRepository;
-    private final SmartphoneRepository smartphoneRepository;
-    private final TVRepository tvRepository;
+    private final ProductRepository productRepository;
+
+
+    @Transactional(readOnly = true)
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 
 }

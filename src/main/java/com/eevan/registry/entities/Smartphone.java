@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue(value = "Smartphone")
-public class Smartphone extends AbstractAppliance{
+public class Smartphone extends Product {
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")

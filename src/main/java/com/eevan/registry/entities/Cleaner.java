@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @DiscriminatorValue(value = "Cleaner")
-public class Cleaner extends AbstractAppliance{
+public class Cleaner extends Product {
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")
