@@ -18,8 +18,22 @@ public class ProductService {
 
 
     @Transactional(readOnly = true)
-    public List<Product> getAllProductsWithSorting(String field, String direction) {
-        Sort sort = Sort.by(field);
+    public List<Product> getAllProductsWithSortingByAlphabet(String direction) {
+        Sort sort = Sort.by("productType");
+
+        if ("asc".equalsIgnoreCase(direction)) {
+            sort = sort.ascending();
+        } else if ("desc".equalsIgnoreCase(direction)) {
+            sort = sort.descending();
+        } else {
+            sort = sort.ascending();
+        }
+        return productRepository.findAll(sort);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Product> getAllProductsWithSortingByPrice(String direction) {
+        Sort sort = Sort.by("modelPrice");
 
         if ("asc".equalsIgnoreCase(direction)) {
             sort = sort.ascending();
@@ -35,10 +49,4 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
-
-    @Transactional(readOnly = true)
-    public List<Product> getAllProductsWithSortingUp(String field) {
-        return productRepository.findAll(Sort.by(Sort.Direction.DESC, field));
-    }
-
 }

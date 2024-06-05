@@ -15,10 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
@@ -35,16 +32,16 @@ public class AppliancesController {
     private final ModelMapper modelMapper;
 
 
-    @GetMapping("/products")
-    public Stream<ProductDTO> getAllProductsWithSorting(@RequestParam String sortBy, @RequestParam String orderBy){
-        return productService.getAllProductsWithSorting(sortBy, orderBy)
+    @GetMapping("/products/byAlphabet")
+    public Stream<ProductDTO> getAllProductsWithSortingByAlphabet(@RequestParam String orderBy){
+        return productService.getAllProductsWithSortingByAlphabet(orderBy)
                 .stream()
                 .map(this::convertToProductDTO);
     }
 
-    @GetMapping("/product/sort_by={field}")
-    public Stream<ProductDTO> getAllProducts(@PathVariable String field){
-        return productService.getAllProductsWithSortingUp(field)
+    @GetMapping("/products/byPrice")
+    public Stream<ProductDTO> getAllProductsWithSortingByPrice(@RequestParam String orderBy){
+        return productService.getAllProductsWithSortingByPrice(orderBy)
                 .stream()
                 .map(this::convertToProductDTO);
     }

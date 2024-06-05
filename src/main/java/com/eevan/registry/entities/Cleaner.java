@@ -42,6 +42,4 @@ public class Cleaner extends Product {
 
     @Column(name = "model_availability")
     private Boolean modelAvailability;
-
-
 }
