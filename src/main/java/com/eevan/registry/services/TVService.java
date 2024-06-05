@@ -18,9 +18,4 @@ public class TVService {
     public void save(TV tv) {
         tvRepository.save(tv);
     }
-
-    @Transactional(readOnly = true)
-    public List<TV> getAllTvs() {
-        return tvRepository.findAll();
-    }
 }

@@ -19,9 +19,4 @@ public class CleanerService {
     public void save(Cleaner cleaner) {
         cleanerRepository.save(cleaner);
     }
-
-    @Transactional(readOnly = true)
-    public List<Cleaner> getAllCleaners() {
-        return cleanerRepository.findCleaner();
-    }
 }

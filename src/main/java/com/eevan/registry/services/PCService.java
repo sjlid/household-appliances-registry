@@ -18,9 +18,4 @@ public class PCService {
     public void save(PC pc) {
         pcRepository.save(pc);
     }
-
-    @Transactional(readOnly = true)
-    public List<PC> getAllPcs() {
-        return pcRepository.findAll();
-    }
 }

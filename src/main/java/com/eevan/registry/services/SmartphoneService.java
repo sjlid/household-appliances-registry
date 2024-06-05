@@ -18,9 +18,4 @@ public class SmartphoneService {
     public void save(Smartphone smartphone) {
         smartphoneRepository.save(smartphone);
     }
-
-    @Transactional(readOnly = true)
-    public List<Smartphone> getAllSmartphones() {
-        return smartphoneRepository.findAll();
-    }
 }

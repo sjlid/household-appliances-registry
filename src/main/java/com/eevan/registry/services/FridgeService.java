@@ -18,9 +18,4 @@ public class FridgeService {
     public void save(Fridge fridge) {
         fridgeRepository.save(fridge);
     }
-
-    @Transactional(readOnly = true)
-    public List<Fridge> getAllFridges() {
-        return fridgeRepository.findAll();
-    }
 }

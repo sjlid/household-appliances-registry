@@ -36,11 +36,17 @@ public class AppliancesController {
 
 
     @GetMapping("/products")
-    public List<ProductDTO> getAllProducts(){
-        return productService.getAllProducts()
+    public Stream<ProductDTO> getAllProductsWithSorting(@RequestParam String sortBy, @RequestParam String orderBy){
+        return productService.getAllProductsWithSorting(sortBy, orderBy)
                 .stream()
-                .map(this::convertToProductDTO)
-                .collect(Collectors.toList());
+                .map(this::convertToProductDTO);
+    }
+
+    @GetMapping("/product/sort_by={field}")
+    public Stream<ProductDTO> getAllProducts(@PathVariable String field){
+        return productService.getAllProductsWithSortingUp(field)
+                .stream()
+                .map(this::convertToProductDTO);
     }
 
     @PostMapping("/cleaners")
