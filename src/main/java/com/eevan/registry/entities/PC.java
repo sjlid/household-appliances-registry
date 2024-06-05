@@ -10,12 +10,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "products")
+@DiscriminatorValue(value = "PC")
 public class PC extends AbstractAppliance{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")
@@ -46,5 +42,5 @@ public class PC extends AbstractAppliance{
     private String modelProcessor;
 
     @Column(name = "model_availability")
-    private boolean modelAvailability;
+    private Boolean modelAvailability;
 }

@@ -31,8 +31,10 @@ public class AppliancesController {
     private final PCService pcService;
     private final SmartphoneService smartphoneService;
     private final TVService tvService;
+    private final ProductService productService;
     private final ModelMapper modelMapper;
 
+    /**
     @GetMapping("/products")
     public List<Object> getAllProducts(){
         return Stream.of(
@@ -44,6 +46,15 @@ public class AppliancesController {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
     }
+     */
+
+//    @GetMapping("/products")
+//    public List<ProductDTO> getAllCleaners(){
+//        return productService.getAllProducts()
+//                .stream()
+//                .map(this::convertToProductDTO)
+//                .collect(Collectors.toList());
+//    }
 
     @PostMapping("/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDTO cleanerDTO,
@@ -179,6 +190,10 @@ public class AppliancesController {
 
     private TvDTO convertToTvDTO(TV tv) {
         return modelMapper.map(tv, TvDTO.class);
+    }
+
+    private ProductDTO convertToProductDTO(Object object) {
+        return modelMapper.map(object, ProductDTO.class);
     }
 
     @ExceptionHandler

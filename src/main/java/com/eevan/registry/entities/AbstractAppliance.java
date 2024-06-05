@@ -1,16 +1,22 @@
 package com.eevan.registry.entities;
 
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "Appliance_type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "appliance")
 public abstract class AbstractAppliance {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
     @NotEmpty(message = "Product type should not be empty")
     @Column(name = "product_type")
     private String productType;
@@ -24,10 +30,10 @@ public abstract class AbstractAppliance {
     private String companyManufacturer;
 
     @Column(name = "online_purchase")
-    private boolean isAbleToBuyOnline;
+    private Boolean isAbleToBuyOnline;
 
     @Column(name = "installment_payment")
-    private boolean isAbleToInstallment;
+    private Boolean isAbleToInstallment;
 
     @Transient
     private ProductFamily productFamily;

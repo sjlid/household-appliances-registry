@@ -12,12 +12,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "products")
+@DiscriminatorValue(value = "Smartphone")
 public class Smartphone extends AbstractAppliance{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")
@@ -41,12 +37,12 @@ public class Smartphone extends AbstractAppliance{
 
     @NotEmpty(message = "Model's memory should not be empty")
     @Column(name = "model_memory")
-    private int modelMemory;
+    private Integer modelMemory;
 
     @NotEmpty(message = "Model's memory should not be empty")
     @Column(name = "model_camera")
     private String modelCamera;
 
     @Column(name = "model_availability")
-    private boolean modelAvailability;
+    private Boolean modelAvailability;
 }

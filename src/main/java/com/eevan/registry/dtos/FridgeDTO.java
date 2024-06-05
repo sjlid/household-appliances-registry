@@ -35,7 +35,7 @@ public class FridgeDTO {
     private BigDecimal modelPrice;
 
     @NotEmpty(message = "Model's doors should not be empty")
-    private int modelDoors;
+    private Integer modelDoors;
 
     @NotEmpty(message = "Model's compressor should not be empty")
     private String modelCompressor;

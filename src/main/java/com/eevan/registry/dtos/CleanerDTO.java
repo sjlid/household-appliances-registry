@@ -34,8 +34,7 @@ public class CleanerDTO{
     @NotEmpty(message = "Model's price should not be empty")
     private BigDecimal modelPrice;
 
-    @NotEmpty(message = "Model's volume should not be empty")
-    private float modelVolume;
+    private Float modelVolume;
 
     @NotEmpty(message = "Model's work modes should not be empty")
     private String modelWorkModes;

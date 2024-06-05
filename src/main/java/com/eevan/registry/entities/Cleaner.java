@@ -10,13 +10,8 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
-@Table(name = "products")
+@DiscriminatorValue(value = "Cleaner")
 public class Cleaner extends AbstractAppliance{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
 
     @NotEmpty(message = "Model's name should not be empty")
     @Column(name = "model_name")
@@ -38,16 +33,15 @@ public class Cleaner extends AbstractAppliance{
     @Column(name = "model_price")
     private BigDecimal modelPrice;
 
-    @NotEmpty(message = "Model's volume should not be empty")
     @Column(name = "model_volume")
-    private float modelVolume;
+    private Float modelVolume;
 
     @NotEmpty(message = "Model's work modes should not be empty")
     @Column(name = "model_modes")
     private String modelWorkModes;
 
     @Column(name = "model_availability")
-    private boolean modelAvailability;
+    private Boolean modelAvailability;
 
 
 }
