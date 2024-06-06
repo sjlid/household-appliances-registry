@@ -15,7 +15,9 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RestController
@@ -110,6 +112,22 @@ public class AppliancesController {
     public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction) {
         return productService.getAllProductsWithSortingByPrice(direction)
                 .stream()
+                .map(this::convertToProductDTO);
+    }
+
+    @GetMapping("/products/search")
+    public List<ProductDto> searchAndFilterProducts(@RequestParam(required = false) String modelName,
+                                        @RequestParam(required = false) String productType,
+                                        @RequestParam(required = false) String color,
+                                        @RequestParam(required = false) BigDecimal minPrice,
+                                        @RequestParam(required = false) BigDecimal maxPrice) {
+
+        return productService.getAllProducts(modelName)
+                .stream()
+                .filter(product -> productType == null || product.getProductType().equalsIgnoreCase(productType))
+                .filter(product -> color == null || product.getModelColor().equalsIgnoreCase(color))
+                .filter(product -> minPrice == null || product.getModelPrice() >= minPrice)
+                .filter(product -> maxPrice == null || product.getModelPrice() <= maxPrice)
                 .map(this::convertToProductDTO);
     }
 

@@ -45,7 +45,6 @@ public abstract class Product {
     @Column(name = "model_size")
     private String modelSize;
 
-    @NotEmpty(message = "Model's price should not be empty")
     @Column(name = "model_price")
     private BigDecimal modelPrice;
 

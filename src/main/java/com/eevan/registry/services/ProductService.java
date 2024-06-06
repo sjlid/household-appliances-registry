@@ -42,4 +42,9 @@ public class ProductService {
         }
         return productRepository.findAll(sort);
     }
+
+    @Transactional(readOnly = true)
+    public List<Product> getAllProducts(String modelName) {
+        return productRepository.findByModelNameLikeAllIgnoreCase(modelName);
+    }
 }

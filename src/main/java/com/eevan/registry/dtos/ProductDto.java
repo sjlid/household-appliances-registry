@@ -27,7 +27,6 @@ public class ProductDto {
     @NotEmpty(message = "Model's size should not be empty")
     private String modelSize;
 
-    @NotEmpty(message = "Model's price should not be empty")
     private BigDecimal modelPrice;
     private Boolean modelAvailability;
 }
