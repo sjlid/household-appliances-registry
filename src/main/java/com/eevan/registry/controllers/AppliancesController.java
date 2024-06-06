@@ -32,57 +32,69 @@ public class AppliancesController {
     private final ProductFamilyService productFamilyService;
     private final ModelMapper modelMapper;
 
-    @PostMapping("/products")
-    public ResponseEntity<HttpStatus> addProductFamily(@RequestBody @Valid ProductFamilyDto productFamilyDto,
-                                                 BindingResult bindingResult) {
-        ErrorCreatingExceptionThrow(bindingResult);
-        productFamilyService.save(convertToProductFamily(productFamilyDto));
 
-        return ResponseEntity.ok(HttpStatus.OK);
+    @PostMapping("/products")
+    public ProductFamilyResponseDto addProductFamily(
+            @RequestBody @Valid ProductFamilyDto productFamilyDto,
+            BindingResult bindingResult
+    ) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        ProductFamily createdProductFamily = convertToProductFamily(productFamilyDto);
+        return convertToProductFamilyResponseDto(productFamilyService.save(createdProductFamily));
     }
 
 
     @PostMapping("/products/cleaners")
-    public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDto cleanerDTO,
-                                                 BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> addCleaner(
+            @RequestBody @Valid CleanerDto cleanerDto,
+            BindingResult bindingResult
+    ) {
         ErrorCreatingExceptionThrow(bindingResult);
-        cleanerService.save(convertToCleaner(cleanerDTO));
+        cleanerService.save(cleanerDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/products/fridges")
-    public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDto fridgeDTO,
-                                                BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> addFridge(
+            @RequestBody @Valid FridgeDto fridgeDto,
+            BindingResult bindingResult
+    ) {
         ErrorCreatingExceptionThrow(bindingResult);
-        fridgeService.save(convertToFridge(fridgeDTO));
+        fridgeService.save(fridgeDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/products/pcs")
-    public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDto pcDTO,
-                                            BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> addPc(
+            @RequestBody @Valid PcDto pcDto,
+            BindingResult bindingResult
+    ) {
         ErrorCreatingExceptionThrow(bindingResult);
-        pcService.save(convertToPC(pcDTO));
+        pcService.save(pcDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/products/smartphones")
-    public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDto smartphoneDTO,
-                                                    BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> addSmartphone(
+            @RequestBody @Valid SmartphoneDto smartphoneDto,
+            BindingResult bindingResult
+    ) {
         ErrorCreatingExceptionThrow(bindingResult);
-        smartphoneService.save(convertToSmartphone(smartphoneDTO));
+        smartphoneService.save(smartphoneDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @PostMapping("/products/tvs")
-    public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDto tvDTO,
-                                            BindingResult bindingResult) {
+    public ResponseEntity<HttpStatus> addTv(
+            @RequestBody @Valid TvDto tvDto,
+            BindingResult bindingResult
+    ) {
         ErrorCreatingExceptionThrow(bindingResult);
-        tvService.save(convertToTV(tvDTO));
+        tvService.save(tvDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
     }
@@ -101,47 +113,6 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
-
-    private Cleaner convertToCleaner(CleanerDto cleanerDTO) {
-        return modelMapper.map(cleanerDTO, Cleaner.class);
-    }
-
-    private CleanerDto convertToCleanerDTO(Cleaner cleaner) {
-        return modelMapper.map(cleaner, CleanerDto.class);
-    }
-
-    private Fridge convertToFridge(FridgeDto fridgeDTO) {
-        return modelMapper.map(fridgeDTO, Fridge.class);
-    }
-
-    private FridgeDto convertToFridgeDTO(Fridge fridge) {
-        return modelMapper.map(fridge, FridgeDto.class);
-    }
-
-    private Pc convertToPC(PcDto pcDTO) {
-        return modelMapper.map(pcDTO, Pc.class);
-    }
-
-    private PcDto convertToPcDTO(Pc pc) {
-        return modelMapper.map(pc, PcDto.class);
-    }
-
-    private Smartphone convertToSmartphone(SmartphoneDto smartphoneDTO) {
-        return modelMapper.map(smartphoneDTO, Smartphone.class);
-    }
-
-    private SmartphoneDto convertToSmartphoneDTO(Smartphone smartphone) {
-        return modelMapper.map(smartphone, SmartphoneDto.class);
-    }
-
-    private Tv convertToTV(TvDto tvDTO) {
-        return modelMapper.map(tvDTO, Tv.class);
-    }
-
-    private TvDto convertToTvDTO(Tv tv) {
-        return modelMapper.map(tv, TvDto.class);
-    }
-
     private ProductDto convertToProductDTO(Product product) {
         return modelMapper.map(product, ProductDto.class);
     }
@@ -149,8 +120,13 @@ public class AppliancesController {
     private ProductFamily convertToProductFamily(ProductFamilyDto productFamilyDto) {
         return modelMapper.map(productFamilyDto, ProductFamily.class);
     }
+
     private ProductFamilyDto convertToProductFamilyDTO(ProductFamily productFamily) {
         return modelMapper.map(productFamily, ProductFamilyDto.class);
+    }
+
+    private ProductFamilyResponseDto convertToProductFamilyResponseDto(ProductFamily productFamily) {
+        return modelMapper.map(productFamily, ProductFamilyResponseDto.class);
     }
 
     @ExceptionHandler

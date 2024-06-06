@@ -8,9 +8,10 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@DiscriminatorValue(value = "Cleaner")
+@DiscriminatorValue(value = "CLEANER")
 public class Cleaner extends Product {
 
+    @NotEmpty(message = "Volume's work modes should not be empty")
     @Column(name = "model_volume")
     private Float modelVolume;
 

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@DiscriminatorValue(value = "Fridge")
+@DiscriminatorValue(value = "FRIDGE")
 public class Fridge extends Product {
 
     @NotEmpty(message = "Model's doors should not be empty")

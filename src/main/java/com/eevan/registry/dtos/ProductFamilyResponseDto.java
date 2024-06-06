@@ -5,11 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductFamilyDto {
+public class ProductFamilyResponseDto {
+    private long id;
     private String familyName;
     private String countryManufacturer;
     private String companyManufacturer;
     private Boolean isAbleToBuyOnline;
     private Boolean isAbleToInstallment;
-    private ProductType productType;
+    private String productType;
 }

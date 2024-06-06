@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@DiscriminatorValue(value = "Smartphone")
+@DiscriminatorValue(value = "SMARTPHONE")
 public class Smartphone extends Product {
 
     @NotEmpty(message = "Model's memory should not be empty")

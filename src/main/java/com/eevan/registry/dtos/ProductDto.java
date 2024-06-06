@@ -9,16 +9,11 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class ProductDto {
+
+    private Long productFamilyId;
+
     @NotEmpty(message = "Product type should not be empty")
-    private String productType;
-
-    @NotEmpty(message = "Manufacturing country should not be empty")
-    private String countryManufacturer;
-
-    @NotEmpty(message = "Manufacturing company should not be empty")
-    private String companyManufacturer;
-    private Boolean isAbleToBuyOnline;
-    private Boolean isAbleToInstallment;
+    private ProductType productType;
 
     @NotEmpty(message = "Model's name should not be empty")
     private String modelName;
