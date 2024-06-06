@@ -25,29 +25,29 @@ public class AppliancesController {
 
     private final CleanerService cleanerService;
     private final FridgeService fridgeService;
-    private final PCService pcService;
+    private final PcService pcService;
     private final SmartphoneService smartphoneService;
-    private final TVService tvService;
+    private final TvService tvService;
     private final ProductService productService;
     private final ModelMapper modelMapper;
 
 
     @GetMapping("/products/byAlphabet")
-    public Stream<ProductDTO> getAllProductsWithSortingByAlphabet(@RequestParam String orderBy){
-        return productService.getAllProductsWithSortingByAlphabet(orderBy)
+    public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction){
+        return productService.getAllProductsWithSortingByAlphabet(direction)
                 .stream()
                 .map(this::convertToProductDTO);
     }
 
     @GetMapping("/products/byPrice")
-    public Stream<ProductDTO> getAllProductsWithSortingByPrice(@RequestParam String orderBy){
-        return productService.getAllProductsWithSortingByPrice(orderBy)
+    public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction){
+        return productService.getAllProductsWithSortingByPrice(direction)
                 .stream()
                 .map(this::convertToProductDTO);
     }
 
     @PostMapping("/cleaners")
-    public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDTO cleanerDTO,
+    public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDto cleanerDTO,
                                                 BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -66,7 +66,7 @@ public class AppliancesController {
     }
 
     @PostMapping("/fridges")
-    public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDTO fridgeDTO,
+    public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDto fridgeDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -85,7 +85,7 @@ public class AppliancesController {
     }
 
     @PostMapping("/pcs")
-    public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDTO pcDTO,
+    public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDto pcDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -104,7 +104,7 @@ public class AppliancesController {
     }
 
     @PostMapping("/smartphones")
-    public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDTO smartphoneDTO,
+    public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDto smartphoneDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -123,7 +123,7 @@ public class AppliancesController {
     }
 
     @PostMapping("/tvs")
-    public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDTO tvDTO,
+    public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDto tvDTO,
                                                  BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
@@ -142,48 +142,48 @@ public class AppliancesController {
     }
 
 
-    private Cleaner convertToCleaner(CleanerDTO cleanerDTO) {
+    private Cleaner convertToCleaner(CleanerDto cleanerDTO) {
         return modelMapper.map(cleanerDTO, Cleaner.class);
     }
 
-    private CleanerDTO convertToCleanerDTO(Cleaner cleaner) {
-        return modelMapper.map(cleaner, CleanerDTO.class);
+    private CleanerDto convertToCleanerDTO(Cleaner cleaner) {
+        return modelMapper.map(cleaner, CleanerDto.class);
     }
 
-    private Fridge convertToFridge(FridgeDTO fridgeDTO) {
+    private Fridge convertToFridge(FridgeDto fridgeDTO) {
         return modelMapper.map(fridgeDTO, Fridge.class);
     }
 
-    private FridgeDTO convertToFridgeDTO(Fridge fridge) {
-        return modelMapper.map(fridge, FridgeDTO.class);
+    private FridgeDto convertToFridgeDTO(Fridge fridge) {
+        return modelMapper.map(fridge, FridgeDto.class);
     }
 
-    private PC convertToPC(PcDTO pcDTO) {
-        return modelMapper.map(pcDTO, PC.class);
+    private Pc convertToPC(PcDto pcDTO) {
+        return modelMapper.map(pcDTO, Pc.class);
     }
 
-    private PcDTO convertToPcDTO(PC pc) {
-        return modelMapper.map(pc, PcDTO.class);
+    private PcDto convertToPcDTO(Pc pc) {
+        return modelMapper.map(pc, PcDto.class);
     }
 
-    private Smartphone convertToSmartphone(SmartphoneDTO smartphoneDTO) {
+    private Smartphone convertToSmartphone(SmartphoneDto smartphoneDTO) {
         return modelMapper.map(smartphoneDTO, Smartphone.class);
     }
 
-    private SmartphoneDTO convertToSmartphoneDTO(Smartphone smartphone) {
-        return modelMapper.map(smartphone, SmartphoneDTO.class);
+    private SmartphoneDto convertToSmartphoneDTO(Smartphone smartphone) {
+        return modelMapper.map(smartphone, SmartphoneDto.class);
     }
 
-    private TV convertToTV(TvDTO tvDTO) {
-        return modelMapper.map(tvDTO, TV.class);
+    private Tv convertToTV(TvDto tvDTO) {
+        return modelMapper.map(tvDTO, Tv.class);
     }
 
-    private TvDTO convertToTvDTO(TV tv) {
-        return modelMapper.map(tv, TvDTO.class);
+    private TvDto convertToTvDTO(Tv tv) {
+        return modelMapper.map(tv, TvDto.class);
     }
 
-    private ProductDTO convertToProductDTO(Object object) {
-        return modelMapper.map(object, ProductDTO.class);
+    private ProductDto convertToProductDTO(Object object) {
+        return modelMapper.map(object, ProductDto.class);
     }
 
     @ExceptionHandler

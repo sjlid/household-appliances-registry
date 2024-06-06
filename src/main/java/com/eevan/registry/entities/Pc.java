@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue(value = "PC")
-public class PC extends Product {
+public class Pc extends Product {
 
     @NotEmpty(message = "Model's category should not be empty")
     @Column(name = "model_category")

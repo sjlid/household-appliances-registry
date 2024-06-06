@@ -2,12 +2,13 @@ package com.eevan.registry.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class SmartphoneDTO {
+public class ProductDto {
     @NotEmpty(message = "Product type should not be empty")
     private String productType;
 
@@ -33,10 +34,5 @@ public class SmartphoneDTO {
 
     @NotEmpty(message = "Model's price should not be empty")
     private BigDecimal modelPrice;
-
-    @NotEmpty(message = "Model's memory should not be empty")
-    private Integer modelMemory;
-
-    private String modelCamera;
     private Boolean modelAvailability;
 }

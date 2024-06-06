@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Appliance_type", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "products")
 public abstract class Product {
 

@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @DiscriminatorValue(value = "TV")
-public class TV extends Product {
+public class Tv extends Product {
 
     @NotEmpty(message = "Model's category should not be empty")
     @Column(name = "model_category")
