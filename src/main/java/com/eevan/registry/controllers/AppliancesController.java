@@ -32,6 +32,60 @@ public class AppliancesController {
     private final ProductFamilyService productFamilyService;
     private final ModelMapper modelMapper;
 
+    @PostMapping("/products")
+    public ResponseEntity<HttpStatus> addProductFamily(@RequestBody @Valid ProductFamilyDto productFamilyDto,
+                                                 BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        productFamilyService.save(convertToProductFamily(productFamilyDto));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/products/cleaners")
+    public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDto cleanerDTO,
+                                                 BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        cleanerService.save(convertToCleaner(cleanerDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/products/fridges")
+    public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDto fridgeDTO,
+                                                BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        fridgeService.save(convertToFridge(fridgeDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/products/pcs")
+    public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDto pcDTO,
+                                            BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        pcService.save(convertToPC(pcDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/products/smartphones")
+    public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDto smartphoneDTO,
+                                                    BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        smartphoneService.save(convertToSmartphone(smartphoneDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PostMapping("/products/tvs")
+    public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDto tvDTO,
+                                            BindingResult bindingResult) {
+        ErrorCreatingExceptionThrow(bindingResult);
+        tvService.save(convertToTV(tvDTO));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
     @GetMapping("/products/byAlphabet")
     public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction) {
@@ -45,121 +99,6 @@ public class AppliancesController {
         return productService.getAllProductsWithSortingByPrice(direction)
                 .stream()
                 .map(this::convertToProductDTO);
-    }
-
-    @PostMapping("/products")
-    public ResponseEntity<HttpStatus> addProductFamily(@RequestBody @Valid ProductFamilyDto productFamilyDto,
-                                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        productFamilyService.save(convertToProductFamily(productFamilyDto));
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-
-    @PostMapping("/products/cleaners")
-    public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDto cleanerDTO,
-                                                 BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        cleanerService.save(convertToCleaner(cleanerDTO));
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    @PostMapping("/products/fridges")
-    public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDto fridgeDTO,
-                                                BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        fridgeService.save(convertToFridge(fridgeDTO));
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    @PostMapping("/products/pcs")
-    public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDto pcDTO,
-                                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        pcService.save(convertToPC(pcDTO));
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    @PostMapping("/products/smartphones")
-    public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDto smartphoneDTO,
-                                                    BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        smartphoneService.save(convertToSmartphone(smartphoneDTO));
-
-        return ResponseEntity.ok(HttpStatus.OK);
-    }
-
-    @PostMapping("/products/tvs")
-    public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDto tvDTO,
-                                            BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder();
-            List<FieldError> errors = bindingResult.getFieldErrors();
-            for (FieldError error : errors) {
-                errorMessage.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
-                        .append(" ; ");
-            }
-            throw new ModelNotCreatedException(errorMessage.toString());
-        }
-        tvService.save(convertToTV(tvDTO));
-
-        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 
@@ -224,5 +163,19 @@ public class AppliancesController {
     private ResponseEntity<ApplianceErrorResponse> handleException(ModelNotCreatedException e) {
         ApplianceErrorResponse response = new ApplianceErrorResponse(e.getMessage(), System.currentTimeMillis());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    private void ErrorCreatingExceptionThrow(BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ModelNotCreatedException(errorMessage.toString());
+        }
     }
 }

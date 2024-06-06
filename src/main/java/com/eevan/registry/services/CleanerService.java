@@ -16,7 +16,8 @@ public class CleanerService {
 
     @Transactional
     public void save(Cleaner cleaner) {
-        cleaner.setProductFamily(productFamilyRepository.findByFamilyName);
+        if (productFamilyRepository.
+        cleaner.setProductFamily(productFamilyRepository.findByFamilyName("cleaner"));
         cleanerRepository.save(cleaner);
     }
 }
