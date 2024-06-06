@@ -48,4 +48,7 @@ public abstract class Product {
     @NotEmpty(message = "Model's price should not be empty")
     @Column(name = "model_price")
     private BigDecimal modelPrice;
+
+    @Column(name = "model_available")
+    private Boolean modelAvailability;
 }

@@ -17,7 +17,7 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<Product> getAllProductsWithSortingByAlphabet(String direction) {
-        Sort sort = Sort.by("productType");
+        Sort sort = Sort.by("modelName");
 
         if ("asc".equalsIgnoreCase(direction)) {
             sort = sort.ascending();
