@@ -118,14 +118,14 @@ public class AppliancesController {
     @GetMapping("/products/search")
     public Stream<ProductDto> searchAndFilterProducts(@RequestParam(required = false) String modelName,
                                         @RequestParam(required = false) String productType,
-                                        @RequestParam(required = false) String color,
+                                        @RequestParam(required = false) String modelColor,
                                         @RequestParam(required = false) BigDecimal minPrice,
                                         @RequestParam(required = false) BigDecimal maxPrice) {
 
         return productService.getAllProducts(modelName)
                 .stream()
                 .filter(product -> productType == null || product.getProductType().equalsIgnoreCase(productType))
-                .filter(product -> color == null || product.getModelColor().equalsIgnoreCase(color))
+                .filter(product -> modelColor == null || product.getModelColor().equalsIgnoreCase(modelColor))
                 .filter(product -> minPrice == null || (product.getModelPrice()).compareTo(minPrice) >= 0)
                 .filter(product -> maxPrice == null || (product.getModelPrice()).compareTo(maxPrice) <= 0)
                 .map(this::convertToProductDTO);
