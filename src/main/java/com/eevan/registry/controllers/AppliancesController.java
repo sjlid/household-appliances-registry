@@ -116,7 +116,7 @@ public class AppliancesController {
     }
 
     @GetMapping("/products/search")
-    public List<ProductDto> searchAndFilterProducts(@RequestParam(required = false) String modelName,
+    public Stream<ProductDto> searchAndFilterProducts(@RequestParam(required = false) String modelName,
                                         @RequestParam(required = false) String productType,
                                         @RequestParam(required = false) String color,
                                         @RequestParam(required = false) BigDecimal minPrice,
@@ -126,8 +126,8 @@ public class AppliancesController {
                 .stream()
                 .filter(product -> productType == null || product.getProductType().equalsIgnoreCase(productType))
                 .filter(product -> color == null || product.getModelColor().equalsIgnoreCase(color))
-                .filter(product -> minPrice == null || product.getModelPrice() >= minPrice)
-                .filter(product -> maxPrice == null || product.getModelPrice() <= maxPrice)
+                .filter(product -> minPrice == null || (product.getModelPrice()).compareTo(minPrice) >= 0)
+                .filter(product -> maxPrice == null || (product.getModelPrice()).compareTo(maxPrice) <= 0)
                 .map(this::convertToProductDTO);
     }
 
