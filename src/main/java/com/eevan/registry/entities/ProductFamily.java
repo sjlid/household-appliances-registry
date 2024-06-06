@@ -2,6 +2,7 @@ package com.eevan.registry.entities;
 
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name = "product_family")
 public class ProductFamily {
 
@@ -37,6 +39,6 @@ public class ProductFamily {
     private String productType;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productFamily")
-    private List<Product> availableProducts = new ArrayList<Product>();
+    private List<Product> availableProducts;
 
 }

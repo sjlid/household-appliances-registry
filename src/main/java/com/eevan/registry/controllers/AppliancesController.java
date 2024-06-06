@@ -29,27 +29,48 @@ public class AppliancesController {
     private final SmartphoneService smartphoneService;
     private final TvService tvService;
     private final ProductService productService;
+    private final ProductFamilyService productFamilyService;
     private final ModelMapper modelMapper;
 
 
     @GetMapping("/products/byAlphabet")
-    public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction){
+    public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction) {
         return productService.getAllProductsWithSortingByAlphabet(direction)
                 .stream()
                 .map(this::convertToProductDTO);
     }
 
     @GetMapping("/products/byPrice")
-    public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction){
+    public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction) {
         return productService.getAllProductsWithSortingByPrice(direction)
                 .stream()
                 .map(this::convertToProductDTO);
     }
 
-    @PostMapping("/cleaners")
+    @PostMapping("/products")
+    public ResponseEntity<HttpStatus> addProductFamily(@RequestBody @Valid ProductFamilyDto productFamilyDto,
+                                                 BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ModelNotCreatedException(errorMessage.toString());
+        }
+        productFamilyService.save(convertToProductFamily(productFamilyDto));
+
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
+    @PostMapping("/products/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(@RequestBody @Valid CleanerDto cleanerDTO,
-                                                BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                                 BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -65,10 +86,10 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/fridges")
+    @PostMapping("/products/fridges")
     public ResponseEntity<HttpStatus> addFridge(@RequestBody @Valid FridgeDto fridgeDTO,
-                                                 BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                                BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -84,10 +105,10 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/pcs")
+    @PostMapping("/products/pcs")
     public ResponseEntity<HttpStatus> addPc(@RequestBody @Valid PcDto pcDTO,
-                                                 BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -103,10 +124,10 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/smartphones")
+    @PostMapping("/products/smartphones")
     public ResponseEntity<HttpStatus> addSmartphone(@RequestBody @Valid SmartphoneDto smartphoneDTO,
-                                                 BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                                    BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -122,10 +143,10 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PostMapping("/tvs")
+    @PostMapping("/products/tvs")
     public ResponseEntity<HttpStatus> addTv(@RequestBody @Valid TvDto tvDTO,
-                                                 BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
+                                            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
@@ -182,8 +203,15 @@ public class AppliancesController {
         return modelMapper.map(tv, TvDto.class);
     }
 
-    private ProductDto convertToProductDTO(Object object) {
-        return modelMapper.map(object, ProductDto.class);
+    private ProductDto convertToProductDTO(Product product) {
+        return modelMapper.map(product, ProductDto.class);
+    }
+
+    private ProductFamily convertToProductFamily(ProductFamilyDto productFamilyDto) {
+        return modelMapper.map(productFamilyDto, ProductFamily.class);
+    }
+    private ProductFamilyDto convertToProductFamilyDTO(ProductFamily productFamily) {
+        return modelMapper.map(productFamily, ProductFamilyDto.class);
     }
 
     @ExceptionHandler

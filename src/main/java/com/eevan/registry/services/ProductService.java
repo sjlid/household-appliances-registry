@@ -42,9 +42,4 @@ public class ProductService {
         }
         return productRepository.findAll(sort);
     }
-
-    @Transactional(readOnly = true)
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
 }

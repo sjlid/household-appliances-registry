@@ -2,6 +2,7 @@ package com.eevan.registry.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+
 import lombok.*;
 
 @Entity
