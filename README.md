@@ -1,3 +1,5 @@
+WIP currently!
+
 Предусловие:
 - Java 8
 - Spring Boot Starter, Spring Web, Spring JPA, Spring Hibernate
