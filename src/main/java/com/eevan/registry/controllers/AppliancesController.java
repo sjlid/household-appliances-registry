@@ -139,10 +139,6 @@ public class AppliancesController {
         return modelMapper.map(productFamilyDto, ProductFamily.class);
     }
 
-    private ProductFamilyDto convertToProductFamilyDTO(ProductFamily productFamily) {
-        return modelMapper.map(productFamily, ProductFamilyDto.class);
-    }
-
     private ProductFamilyResponseDto convertToProductFamilyResponseDto(ProductFamily productFamily) {
         return modelMapper.map(productFamily, ProductFamilyResponseDto.class);
     }
