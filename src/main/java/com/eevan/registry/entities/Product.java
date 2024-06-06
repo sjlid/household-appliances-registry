@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "Appliance_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "products")
@@ -19,8 +20,9 @@ public abstract class Product {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "family_id")
-    private Long familyId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "family_id")
+    private ProductFamily productFamily;
 
     @NotEmpty(message = "Product type should not be empty")
     @Column(name = "product_type")
