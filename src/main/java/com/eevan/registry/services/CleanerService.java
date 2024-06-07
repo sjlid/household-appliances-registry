@@ -26,6 +26,11 @@ public class CleanerService {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(cleanerDto.getProductFamilyId());
         Cleaner cleaner = convertToCleaner(cleanerDto);
         cleaner.setProductFamily(productFamily);
+        if (cleaner.getModelAvailability()) {
+            int totalModels = productFamily.getAvailableProducts() + 1;
+            productFamily.setAvailableProducts(totalModels);
+            productFamilyRepository.save(productFamily);
+        }
         cleanerRepository.save(cleaner);
     }
 

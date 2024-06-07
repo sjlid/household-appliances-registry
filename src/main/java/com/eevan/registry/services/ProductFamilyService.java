@@ -14,6 +14,7 @@ public class ProductFamilyService {
 
     @Transactional
     public ProductFamily save(ProductFamily productFamily) {
+        productFamily.setAvailableProducts(0);
         return productFamilyRepository.save(productFamily);
     }
 }

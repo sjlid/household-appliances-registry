@@ -26,6 +26,11 @@ public class FridgeService {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(fridgeDto.getProductFamilyId());
         Fridge fridge = convertToFridge(fridgeDto);
         fridge.setProductFamily(productFamily);
+        if (fridge.getModelAvailability()) {
+            int totalModels = productFamily.getAvailableProducts() + 1;
+            productFamily.setAvailableProducts(totalModels);
+            productFamilyRepository.save(productFamily);
+        }
         fridgeRepository.save(fridge);
     }
 

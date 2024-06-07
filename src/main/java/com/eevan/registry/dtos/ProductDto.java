@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class ProductDto {
-
     private Long productFamilyId;
     private ProductType productType;
     private String modelName;

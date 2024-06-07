@@ -12,4 +12,5 @@ public class ProductFamilyDto {
     private Boolean isAbleToBuyOnline;
     private Boolean isAbleToInstallment;
     private ProductType productType;
+    private Integer availableProducts;
 }

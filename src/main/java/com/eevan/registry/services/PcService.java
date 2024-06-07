@@ -25,6 +25,11 @@ public class PcService {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(pcDto.getProductFamilyId());
         Pc pc = convertToPc(pcDto);
         pc.setProductFamily(productFamily);
+        if (pc.getModelAvailability()) {
+            int totalModels = productFamily.getAvailableProducts() + 1;
+            productFamily.setAvailableProducts(totalModels);
+            productFamilyRepository.save(productFamily);
+        }
         pcRepository.save(pc);
     }
 

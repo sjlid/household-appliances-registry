@@ -25,6 +25,11 @@ public class SmartphoneService {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(smartphoneDto.getProductFamilyId());
         Smartphone smartphone = convertToSmartphone(smartphoneDto);
         smartphone.setProductFamily(productFamily);
+        if (smartphone.getModelAvailability()) {
+            int totalModels = productFamily.getAvailableProducts() + 1;
+            productFamily.setAvailableProducts(totalModels);
+            productFamilyRepository.save(productFamily);
+        }
         smartphoneRepository.save(smartphone);
     }
 

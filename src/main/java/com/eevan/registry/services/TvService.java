@@ -25,6 +25,11 @@ public class TvService {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(tvDto.getProductFamilyId());
         Tv tv = convertToPc(tvDto);
         tv.setProductFamily(productFamily);
+        if (tv.getModelAvailability()) {
+            int totalModels = productFamily.getAvailableProducts() + 1;
+            productFamily.setAvailableProducts(totalModels);
+            productFamilyRepository.save(productFamily);
+        }
         tvRepository.save(tv);
     }
 

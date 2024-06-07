@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product_family", schema = "public")
+@Table(name = "product_family")
 public class ProductFamily {
 
     @Id
@@ -44,7 +44,7 @@ public class ProductFamily {
     @Column(name = "product_type")
     private String productType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productFamily")
-    private List<Product> availableProducts;
+    @Column(name = "models_available")
+    private Integer availableProducts;
 
 }
