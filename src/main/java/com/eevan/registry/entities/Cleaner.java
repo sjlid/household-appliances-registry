@@ -8,6 +8,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @DiscriminatorValue(value = "CLEANER")
 public class Cleaner extends Product {
 
