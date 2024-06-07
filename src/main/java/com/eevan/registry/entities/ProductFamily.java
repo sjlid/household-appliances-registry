@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Entity
@@ -19,21 +20,27 @@ public class ProductFamily {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "Family name should not be empty")
     @Column(name = "family_name")
     private String familyName;
 
+    @NotEmpty(message = "Country manufacturer should not be empty")
     @Column(name = "country_manufacturer")
     private String countryManufacturer;
 
+    @NotEmpty(message = "Company manufacturer should not be empty")
     @Column(name = "company_manufacturer")
     private String companyManufacturer;
 
+    @NotEmpty(message = "Possibility to buy online should not be empty")
     @Column(name = "buy_online")
     private Boolean isAbleToBuyOnline;
 
+    @NotEmpty(message = "Installment payment possibility should not be empty")
     @Column(name = "installment")
     private Boolean isAbleToInstallment;
 
+    @NotEmpty(message = "Product type should not be empty")
     @Column(name = "product_type")
     private String productType;
 
