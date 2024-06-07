@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "products")
+@Table(name = "products", schema = "public")
 public abstract class Product {
 
     @Id
@@ -22,7 +22,7 @@ public abstract class Product {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "family_id")
+    @JoinColumn(name = "family_id", referencedColumnName = "id")
     private ProductFamily productFamily;
 
     @NotEmpty(message = "Product type should not be empty")

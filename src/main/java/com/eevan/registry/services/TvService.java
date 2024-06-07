@@ -1,6 +1,7 @@
 package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.TvDto;
+import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.entities.Tv;
 import com.eevan.registry.repos.ProductFamilyRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,11 @@ public class TvService {
         Tv tv = convertToPc(tvDto);
         tv.setProductFamily(productFamily);
         tvRepository.save(tv);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Tv> getAllTvs() {
+        return tvRepository.findAll();
     }
 
     private Tv convertToPc(TvDto tvDto) {

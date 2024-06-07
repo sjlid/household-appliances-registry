@@ -1,6 +1,5 @@
 package com.eevan.registry.services;
 
-import com.eevan.registry.dtos.ProductFamilyResponseDto;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.ProductFamilyRepository;
 import lombok.RequiredArgsConstructor;

@@ -2,6 +2,7 @@ package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.CleanerDto;
 import com.eevan.registry.entities.Cleaner;
+import com.eevan.registry.entities.Product;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.CleanerRepository;
 import com.eevan.registry.repos.ProductFamilyRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -26,7 +29,13 @@ public class CleanerService {
         cleanerRepository.save(cleaner);
     }
 
+    @Transactional(readOnly = true)
+    public List<Cleaner> getAllCleaners() {
+        return cleanerRepository.findAll();
+    }
+
     private Cleaner convertToCleaner(CleanerDto cleanerDTO) {
         return modelMapper.map(cleanerDTO, Cleaner.class);
     }
+
 }

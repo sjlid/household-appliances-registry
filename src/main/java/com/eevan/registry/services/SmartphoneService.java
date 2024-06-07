@@ -1,6 +1,7 @@
 package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.SmartphoneDto;
+import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.entities.Smartphone;
 import com.eevan.registry.repos.ProductFamilyRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,11 @@ public class SmartphoneService {
         Smartphone smartphone = convertToSmartphone(smartphoneDto);
         smartphone.setProductFamily(productFamily);
         smartphoneRepository.save(smartphone);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Smartphone> getAllSmartphones() {
+        return smartphoneRepository.findAll();
     }
 
     private Smartphone convertToSmartphone(SmartphoneDto smartphoneDto) {

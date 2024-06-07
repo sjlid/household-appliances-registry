@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "product_family")
+@Table(name = "product_family", schema = "public")
 public class ProductFamily {
 
     @Id

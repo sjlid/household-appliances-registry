@@ -1,6 +1,7 @@
 package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.FridgeDto;
+import com.eevan.registry.entities.Cleaner;
 import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.FridgeRepository;
@@ -9,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Service
@@ -24,6 +27,11 @@ public class FridgeService {
         Fridge fridge = convertToFridge(fridgeDto);
         fridge.setProductFamily(productFamily);
         fridgeRepository.save(fridge);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Fridge> getAllFridges() {
+        return fridgeRepository.findAll();
     }
 
     private Fridge convertToFridge(FridgeDto fridgeDto) {
