@@ -4,8 +4,8 @@ import com.eevan.registry.dtos.*;
 import com.eevan.registry.entities.*;
 import com.eevan.registry.services.*;
 import com.eevan.registry.utils.ApplianceErrorResponse;
-import com.eevan.registry.utils.ApplianceNotFoundException;
-import com.eevan.registry.utils.ModelNotCreatedException;
+import com.eevan.registry.utils.ProductNotFoundException;
+import com.eevan.registry.utils.ProductNotCreatedException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -392,13 +392,13 @@ public class AppliancesController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<ApplianceErrorResponse> handleException(ApplianceNotFoundException e) {
-        ApplianceErrorResponse response = new ApplianceErrorResponse("Appliance not found!", System.currentTimeMillis());
+    private ResponseEntity<ApplianceErrorResponse> handleException(ProductNotFoundException e) {
+        ApplianceErrorResponse response = new ApplianceErrorResponse("Product not found!", System.currentTimeMillis());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    private ResponseEntity<ApplianceErrorResponse> handleException(ModelNotCreatedException e) {
+    private ResponseEntity<ApplianceErrorResponse> handleException(ProductNotCreatedException e) {
         ApplianceErrorResponse response = new ApplianceErrorResponse(e.getMessage(), System.currentTimeMillis());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -413,7 +413,7 @@ public class AppliancesController {
                         .append(error.getDefaultMessage())
                         .append(" ; ");
             }
-            throw new ModelNotCreatedException(errorMessage.toString());
+            throw new ProductNotCreatedException(errorMessage.toString());
         }
     }
 }
