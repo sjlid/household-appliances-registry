@@ -45,6 +45,6 @@ public class ProductService {
 
     @Transactional(readOnly = true)
     public List<Product> getAllProducts(String modelName) {
-        return productRepository.findByModelNameLikeAllIgnoreCase(modelName);
+        return productRepository.findByModelNameAllIgnoreCaseContaining(modelName);
     }
 }
