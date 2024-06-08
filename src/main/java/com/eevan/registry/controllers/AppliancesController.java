@@ -334,7 +334,6 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
-    /*
     @GetMapping("/products/search")
     public Stream<ProductDto> searchAndFilterProducts(
             @RequestParam(required = false) String searchValue,
@@ -359,7 +358,6 @@ public class AppliancesController {
                         .compareTo(maxPrice) <= 0)
                 .map(this::convertToProductDTO);
     }
-     */
 
     private CleanerDto convertToCleanerDto(Cleaner cleaner) {
         return modelMapper.map(cleaner, CleanerDto.class);

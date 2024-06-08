@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "products")
+@Table(name = "products", indexes = @Index(columnList = "model_name"))
 public abstract class Product {
 
     @Id

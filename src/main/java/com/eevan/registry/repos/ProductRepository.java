@@ -12,9 +12,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByModelNameAllIgnoreCaseContaining(String modelName);
 
-    /*
-    @Query("SELECT p FROM Product p WHERE p.modelName LIKE %?1% OR p.productFamily.familyName LIKE %?2%")
-    List<Product> findByModelNameOrProductFamilyFamilyNameAllIgnoreCaseContaining(String modelName, String familyName);
-     */
 
+    @Query("SELECT DISTINCT p FROM Product p WHERE LOWER(p.modelName) LIKE ?1% OR LOWER(p.productFamily.familyName) LIKE ?1%")
+    List<Product> findProductsByName(String searchValue);
 }

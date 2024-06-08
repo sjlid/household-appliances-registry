@@ -4,6 +4,7 @@ import com.eevan.registry.dtos.SmartphoneDto;
 import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.entities.Smartphone;
+import com.eevan.registry.entities.Tv;
 import com.eevan.registry.repos.ProductFamilyRepository;
 import com.eevan.registry.repos.SmartphoneRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,6 @@ import java.util.List;
 public class SmartphoneService {
     private final SmartphoneRepository smartphoneRepository;
     private final ProductFamilyRepository productFamilyRepository;
-    private final ModelMapper modelMapper;
 
     @Transactional
     public void save(SmartphoneDto smartphoneDto) {
@@ -39,6 +39,16 @@ public class SmartphoneService {
     }
 
     private Smartphone convertToSmartphone(SmartphoneDto smartphoneDto) {
-        return modelMapper.map(smartphoneDto, Smartphone.class);
+        Smartphone smartphone = new Smartphone();
+        smartphone.setModelName(smartphoneDto.getModelName());
+        smartphone.setModelSerialNumber(smartphoneDto.getModelSerialNumber());
+        smartphone.setProductType(smartphoneDto.getProductType().toString());
+        smartphone.setModelSize(smartphoneDto.getModelSize());
+        smartphone.setModelColor(smartphoneDto.getModelColor());
+        smartphone.setModelPrice(smartphoneDto.getModelPrice());
+        smartphone.setModelAvailability(smartphoneDto.getModelAvailability());
+        smartphone.setModelCamera(smartphoneDto.getModelCamera());
+        smartphone.setModelMemory(smartphoneDto.getModelMemory());
+        return smartphone;
     }
 }

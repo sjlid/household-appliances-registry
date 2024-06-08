@@ -1,13 +1,11 @@
 package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.FridgeDto;
-import com.eevan.registry.entities.Cleaner;
 import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.FridgeRepository;
 import com.eevan.registry.repos.ProductFamilyRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class FridgeService {
     private final FridgeRepository fridgeRepository;
     private final ProductFamilyRepository productFamilyRepository;
-    private final ModelMapper modelMapper;
 
     @Transactional
     public void save(FridgeDto fridgeDto) {
@@ -40,6 +37,16 @@ public class FridgeService {
     }
 
     private Fridge convertToFridge(FridgeDto fridgeDto) {
-        return modelMapper.map(fridgeDto, Fridge.class);
+        Fridge fridge = new Fridge();
+        fridge.setModelName(fridgeDto.getModelName());
+        fridge.setModelSerialNumber(fridgeDto.getModelSerialNumber());
+        fridge.setProductType(fridgeDto.getProductType().toString());
+        fridge.setModelSize(fridgeDto.getModelSize());
+        fridge.setModelColor(fridgeDto.getModelColor());
+        fridge.setModelPrice(fridgeDto.getModelPrice());
+        fridge.setModelAvailability(fridgeDto.getModelAvailability());
+        fridge.setModelCompressor(fridgeDto.getModelCompressor());
+        fridge.setModelDoors(fridgeDto.getModelDoors());
+        return fridge;
     }
 }

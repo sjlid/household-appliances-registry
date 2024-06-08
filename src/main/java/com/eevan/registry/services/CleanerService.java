@@ -2,12 +2,10 @@ package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.CleanerDto;
 import com.eevan.registry.entities.Cleaner;
-import com.eevan.registry.entities.Product;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.CleanerRepository;
 import com.eevan.registry.repos.ProductFamilyRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class CleanerService {
     private final CleanerRepository cleanerRepository;
     private final ProductFamilyRepository productFamilyRepository;
-    private final ModelMapper modelMapper;
 
     @Transactional
     public void save(CleanerDto cleanerDto) {
@@ -40,7 +37,16 @@ public class CleanerService {
     }
 
     private Cleaner convertToCleaner(CleanerDto cleanerDTO) {
-        return modelMapper.map(cleanerDTO, Cleaner.class);
+        Cleaner cleaner = new Cleaner();
+        cleaner.setModelName(cleanerDTO.getModelName());
+        cleaner.setModelSerialNumber(cleanerDTO.getModelSerialNumber());
+        cleaner.setProductType(cleanerDTO.getProductType().toString());
+        cleaner.setModelSize(cleanerDTO.getModelSize());
+        cleaner.setModelColor(cleanerDTO.getModelColor());
+        cleaner.setModelPrice(cleanerDTO.getModelPrice());
+        cleaner.setModelAvailability(cleanerDTO.getModelAvailability());
+        cleaner.setModelVolume(cleanerDTO.getModelVolume());
+        cleaner.setModelWorkModes(cleanerDTO.getModelWorkModes());
+        return cleaner;
     }
-
 }

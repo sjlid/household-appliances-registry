@@ -1,13 +1,11 @@
 package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.PcDto;
-import com.eevan.registry.entities.Fridge;
 import com.eevan.registry.entities.Pc;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.repos.PcRepository;
 import com.eevan.registry.repos.ProductFamilyRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +16,6 @@ import java.util.List;
 public class PcService {
     private final PcRepository pcRepository;
     private final ProductFamilyRepository productFamilyRepository;
-    private final ModelMapper modelMapper;
 
     @Transactional
     public void save(PcDto pcDto) {
@@ -39,6 +36,16 @@ public class PcService {
     }
 
     private Pc convertToPc(PcDto pcDto) {
-        return modelMapper.map(pcDto, Pc.class);
+        Pc pc = new Pc();
+        pc.setModelName(pcDto.getModelName());
+        pc.setModelSerialNumber(pcDto.getModelSerialNumber());
+        pc.setProductType(pcDto.getProductType().toString());
+        pc.setModelSize(pcDto.getModelSize());
+        pc.setModelColor(pcDto.getModelColor());
+        pc.setModelPrice(pcDto.getModelPrice());
+        pc.setModelAvailability(pcDto.getModelAvailability());
+        pc.setModelCategory(pcDto.getModelCategory());
+        pc.setModelProcessor(pcDto.getModelProcessor());
+        return pc;
     }
 }

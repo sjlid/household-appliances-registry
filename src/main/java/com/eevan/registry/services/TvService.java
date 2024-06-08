@@ -2,6 +2,7 @@ package com.eevan.registry.services;
 
 import com.eevan.registry.dtos.TvDto;
 import com.eevan.registry.entities.Fridge;
+import com.eevan.registry.entities.Pc;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.entities.Tv;
 import com.eevan.registry.repos.ProductFamilyRepository;
@@ -18,7 +19,6 @@ import java.util.List;
 public class TvService {
     private final TvRepository tvRepository;
     private final ProductFamilyRepository productFamilyRepository;
-    private final ModelMapper modelMapper;
 
     @Transactional
     public void save(TvDto tvDto) {
@@ -39,6 +39,16 @@ public class TvService {
     }
 
     private Tv convertToPc(TvDto tvDto) {
-        return modelMapper.map(tvDto, Tv.class);
+        Tv tv = new Tv();
+        tv.setModelName(tvDto.getModelName());
+        tv.setModelSerialNumber(tvDto.getModelSerialNumber());
+        tv.setProductType(tvDto.getProductType().toString());
+        tv.setModelSize(tvDto.getModelSize());
+        tv.setModelColor(tvDto.getModelColor());
+        tv.setModelPrice(tvDto.getModelPrice());
+        tv.setModelAvailability(tvDto.getModelAvailability());
+        tv.setModelCategory(tvDto.getModelCategory());
+        tv.setModelTechnology(tvDto.getModelTechnology());
+        return tv;
     }
 }
