@@ -48,8 +48,10 @@ public class ProductService {
         return productRepository.findByModelNameAllIgnoreCaseContaining(modelName);
     }
 
+    /*
     @Transactional(readOnly = true)
     public List<Product> getProductsByModelNameOrFamilyName(String searchValue) {
-        return productRepository.findProductsByModelNameOrFamilyNameAllIgnoreCaseContaining(searchValue);
+        return productRepository.findByModelNameOrProductFamilyFamilyNameAllIgnoreCaseContaining(searchValue, searchValue);
     }
+     */
 }

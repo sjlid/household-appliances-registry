@@ -12,6 +12,9 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByModelNameAllIgnoreCaseContaining(String modelName);
 
-    @Query(value = "SELECT p FROM Product p JOIN ProductFamily f ON p.family_id = f.id WHERE p.modelName = ?1 OR f.familyName = ?1", nativeQuery = true)
-    List<Product> findProductsByModelNameOrFamilyNameAllIgnoreCaseContaining(String searchValue);
+    /*
+    @Query("SELECT p FROM Product p WHERE p.modelName LIKE %?1% OR p.productFamily.familyName LIKE %?2%")
+    List<Product> findByModelNameOrProductFamilyFamilyNameAllIgnoreCaseContaining(String modelName, String familyName);
+     */
+
 }
