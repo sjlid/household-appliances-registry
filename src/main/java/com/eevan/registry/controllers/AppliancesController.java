@@ -6,6 +6,7 @@ import com.eevan.registry.services.*;
 import com.eevan.registry.utils.ApplianceErrorResponse;
 import com.eevan.registry.utils.ProductNotFoundException;
 import com.eevan.registry.utils.ProductNotCreatedException;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class AppliancesController {
     private final ProductFamilyService productFamilyService;
     private final ModelMapper modelMapper;
 
-
+    @Operation(summary = "Create product family", description = "Here you can create a family of different types of product", tags = { "product" })
     @PostMapping("/products")
     public ProductFamilyResponseDto addProductFamily(
             @RequestBody @Valid ProductFamilyDto productFamilyDto,
@@ -44,7 +45,7 @@ public class AppliancesController {
         return convertToProductFamilyResponseDto(productFamilyService.save(createdProductFamily));
     }
 
-
+    @Operation(summary = "Create a model of cleaner", description = "Here you can create a model for cleaner's family has yet created", tags = { "cleaner" })
     @PostMapping("/products/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(
             @RequestBody @Valid CleanerDto cleanerDto,
@@ -56,6 +57,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all the cleaners with all the model's filters", tags = { "cleaner" })
     @GetMapping("/products/cleaners")
     public Stream<CleanerDto> searchAndFilterCleaners(
             @RequestParam(required = false) String modelName,
@@ -100,6 +102,7 @@ public class AppliancesController {
                 .map(this::convertToCleanerDto);
     }
 
+    @Operation(summary = "Create a model of fridge", description = "Here you can create a model for fridge's family has yet created", tags = { "fridge" })
     @PostMapping("/products/fridges")
     public ResponseEntity<HttpStatus> addFridge(
             @RequestBody @Valid FridgeDto fridgeDto,
@@ -111,6 +114,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all the fridges with all the model's filters", tags = { "fridge" })
     @GetMapping("/products/fridges")
     public Stream<FridgeDto> searchAndFilterFridges(
             @RequestParam(required = false) String modelName,
@@ -155,6 +159,7 @@ public class AppliancesController {
                 .map(this::convertToFridgeDto);
     }
 
+    @Operation(summary = "Create a model of PC", description = "Here you can create a model for PC's family has yet created", tags = { "pc" })
     @PostMapping("/products/pcs")
     public ResponseEntity<HttpStatus> addPc(
             @RequestBody @Valid PcDto pcDto,
@@ -166,6 +171,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all the PCs with all the model's filters", tags = { "pc" })
     @GetMapping("/products/pcs")
     public Stream<PcDto> searchAndFilterPcs(
             @RequestParam(required = false) String modelName,
@@ -210,6 +216,7 @@ public class AppliancesController {
                 .map(this::convertToPcDto);
     }
 
+    @Operation(summary = "Create a model of smartphone", description = "Here you can create a model for smartphone's family has yet created", tags = { "smartphone" })
     @PostMapping("/products/smartphones")
     public ResponseEntity<HttpStatus> addSmartphone(
             @RequestBody @Valid SmartphoneDto smartphoneDto,
@@ -221,6 +228,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all the smartphones with all the model's filters", tags = { "smartphone" })
     @GetMapping("/products/smartphones")
     public Stream<SmartphoneDto> searchAndFilterSmartphones(
             @RequestParam(required = false) String modelName,
@@ -265,6 +273,7 @@ public class AppliancesController {
                 .map(this::convertToSmartphoneDto);
     }
 
+    @Operation(summary = "Create a model of TV", description = "Here you can create a model for TV's family has yet created", tags = { "tv" })
     @PostMapping("/products/tvs")
     public ResponseEntity<HttpStatus> addTv(
             @RequestBody @Valid TvDto tvDto,
@@ -276,6 +285,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @Operation(summary = "Get all the TVs with all the model's filters", tags = { "tv" })
     @GetMapping("/products/tvs")
     public Stream<TvDto> searchAndFilterTvs(
             @RequestParam(required = false) String modelName,
@@ -320,6 +330,7 @@ public class AppliancesController {
                 .map(this::convertToTvDto);
     }
 
+    @Operation(summary = "Get all the models in DB with possibility to sorting by alphabet in both directions", tags = { "product" })
     @GetMapping("/products/byAlphabet")
     public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction) {
         return productService.getAllProductsWithSortingByAlphabet(direction)
@@ -327,6 +338,7 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
+    @Operation(summary = "Get all the models in DB with possibility to sorting by price in both directions", tags = { "product" })
     @GetMapping("/products/byPrice")
     public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction) {
         return productService.getAllProductsWithSortingByPrice(direction)
@@ -334,6 +346,7 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
+    @Operation(summary = "Get all the products by its name (family + model as example) with possibility to use the following filters: product type, color and price(from...to...)", tags = { "product" })
     @GetMapping("/products/search")
     public Stream<ProductDto> searchAndFilterProducts(
             @RequestParam(required = false) String searchValue,

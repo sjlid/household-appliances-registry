@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductFamilyRepository extends JpaRepository<ProductFamily, Long> {
     default ProductFamily getFamilyById(long familyId) {
         return findById(familyId).orElseThrow(ProductFamilyNotFoundException::new);
-    };
+    }
 }
