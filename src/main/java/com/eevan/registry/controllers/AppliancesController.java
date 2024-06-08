@@ -7,6 +7,8 @@ import com.eevan.registry.utils.ApplianceErrorResponse;
 import com.eevan.registry.utils.ProductNotFoundException;
 import com.eevan.registry.utils.ProductNotCreatedException;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,7 @@ public class AppliancesController {
     @Operation(summary = "Create product family", description = "Here you can create a family of different types of product", tags = { "product" })
     @PostMapping("/products")
     public ProductFamilyResponseDto addProductFamily(
+            @Parameter(description = "Create a new product family in the registry", required = true)
             @RequestBody @Valid ProductFamilyDto productFamilyDto,
             BindingResult bindingResult
     ) {
@@ -48,6 +51,7 @@ public class AppliancesController {
     @Operation(summary = "Create a model of cleaner", description = "Here you can create a model for cleaner's family has yet created", tags = { "cleaner" })
     @PostMapping("/products/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(
+            @Parameter(description = "Create a new model of cleaner in the registry", required = true)
             @RequestBody @Valid CleanerDto cleanerDto,
             BindingResult bindingResult
     ) {
@@ -105,6 +109,7 @@ public class AppliancesController {
     @Operation(summary = "Create a model of fridge", description = "Here you can create a model for fridge's family has yet created", tags = { "fridge" })
     @PostMapping("/products/fridges")
     public ResponseEntity<HttpStatus> addFridge(
+            @Parameter(description = "Create a new model of fridge in the registry", required = true)
             @RequestBody @Valid FridgeDto fridgeDto,
             BindingResult bindingResult
     ) {
@@ -162,6 +167,7 @@ public class AppliancesController {
     @Operation(summary = "Create a model of PC", description = "Here you can create a model for PC's family has yet created", tags = { "pc" })
     @PostMapping("/products/pcs")
     public ResponseEntity<HttpStatus> addPc(
+            @Parameter(description = "Create a new model of PC in the registry", required = true)
             @RequestBody @Valid PcDto pcDto,
             BindingResult bindingResult
     ) {
@@ -219,6 +225,7 @@ public class AppliancesController {
     @Operation(summary = "Create a model of smartphone", description = "Here you can create a model for smartphone's family has yet created", tags = { "smartphone" })
     @PostMapping("/products/smartphones")
     public ResponseEntity<HttpStatus> addSmartphone(
+            @Parameter(description = "Create a new model of smartphone in the registry", required = true)
             @RequestBody @Valid SmartphoneDto smartphoneDto,
             BindingResult bindingResult
     ) {
@@ -276,6 +283,7 @@ public class AppliancesController {
     @Operation(summary = "Create a model of TV", description = "Here you can create a model for TV's family has yet created", tags = { "tv" })
     @PostMapping("/products/tvs")
     public ResponseEntity<HttpStatus> addTv(
+            @Parameter(description = "Create a new model of TV in the registry", required = true)
             @RequestBody @Valid TvDto tvDto,
             BindingResult bindingResult
     ) {
