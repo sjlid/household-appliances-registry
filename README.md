@@ -1,4 +1,7 @@
-WIP currently!
+Swagger page with docs:
+http://localhost:8080/swagger-ui/index.html
+
+
 
 Предусловие:
 - Java 8
