@@ -4,11 +4,13 @@ import com.eevan.registry.dtos.*;
 import com.eevan.registry.entities.*;
 import com.eevan.registry.services.*;
 import com.eevan.registry.utils.ApplianceErrorResponse;
-import com.eevan.registry.utils.ProductNotFoundException;
+import com.eevan.registry.utils.ProductFamilyNotCreatedException;
+import com.eevan.registry.utils.ProductFamilyNotFoundException;
 import com.eevan.registry.utils.ProductNotCreatedException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -37,25 +39,34 @@ public class AppliancesController {
     private final ModelMapper modelMapper;
 
     @Operation(summary = "Create product family", description = "Here you can create a family of different types of product", tags = { "product" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product family has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products")
     public ProductFamilyResponseDto addProductFamily(
-            @Parameter(description = "Create a new product family in the registry", required = true)
             @RequestBody @Valid ProductFamilyDto productFamilyDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductFamilyCreatingExceptionThrow(bindingResult);
         ProductFamily createdProductFamily = convertToProductFamily(productFamilyDto);
         return convertToProductFamilyResponseDto(productFamilyService.save(createdProductFamily));
     }
 
     @Operation(summary = "Create a model of cleaner", description = "Here you can create a model for cleaner's family has yet created", tags = { "cleaner" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Model has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products/cleaners")
     public ResponseEntity<HttpStatus> addCleaner(
             @Parameter(description = "Create a new model of cleaner in the registry", required = true)
             @RequestBody @Valid CleanerDto cleanerDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductCreatingExceptionThrow(bindingResult);
         cleanerService.save(cleanerDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
@@ -64,15 +75,15 @@ public class AppliancesController {
     @Operation(summary = "Get all the cleaners with all the model's filters", tags = { "cleaner" })
     @GetMapping("/products/cleaners")
     public Stream<CleanerDto> searchAndFilterCleaners(
-            @RequestParam(required = false) String modelName,
-            @RequestParam(required = false) String modelSerialNumber,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) String modelSize,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) Float modelVolume,
-            @RequestParam(required = false) String modelWorkModes,
-            @RequestParam(required = false) Boolean modelAvailability
+            @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
+            @Parameter(description = "The model's serial number for filter", required = false) @RequestParam(required = false) String modelSerialNumber,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's size for filter", required = false) @RequestParam(required = false) String modelSize,
+            @Parameter(description = "The model's min price  for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "The model's volume for filter", required = false) @RequestParam(required = false) Float modelVolume,
+            @Parameter(description = "The model's work modes for filter", required = false) @RequestParam(required = false) String modelWorkModes,
+            @Parameter(description = "The model's availability for filter", required = false) @RequestParam(required = false) Boolean modelAvailability
     ) {
         return cleanerService.getAllCleaners()
                 .stream()
@@ -107,13 +118,18 @@ public class AppliancesController {
     }
 
     @Operation(summary = "Create a model of fridge", description = "Here you can create a model for fridge's family has yet created", tags = { "fridge" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Model has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products/fridges")
     public ResponseEntity<HttpStatus> addFridge(
             @Parameter(description = "Create a new model of fridge in the registry", required = true)
             @RequestBody @Valid FridgeDto fridgeDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductCreatingExceptionThrow(bindingResult);
         fridgeService.save(fridgeDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
@@ -122,15 +138,15 @@ public class AppliancesController {
     @Operation(summary = "Get all the fridges with all the model's filters", tags = { "fridge" })
     @GetMapping("/products/fridges")
     public Stream<FridgeDto> searchAndFilterFridges(
-            @RequestParam(required = false) String modelName,
-            @RequestParam(required = false) String modelSerialNumber,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) String modelSize,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) Integer modelDoors,
-            @RequestParam(required = false) String modelCompressor,
-            @RequestParam(required = false) Boolean modelAvailability
+            @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
+            @Parameter(description = "The model's serial number for filter", required = false) @RequestParam(required = false) String modelSerialNumber,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's size for filter", required = false) @RequestParam(required = false) String modelSize,
+            @Parameter(description = "The model's min price  for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "The model's quantity of doors for filter", required = false) @RequestParam(required = false) Integer modelDoors,
+            @Parameter(description = "The model's compressor for filter", required = false) @RequestParam(required = false) String modelCompressor,
+            @Parameter(description = "The model's availability for filter", required = false) @RequestParam(required = false) Boolean modelAvailability
     ) {
         return fridgeService.getAllFridges()
                 .stream()
@@ -165,13 +181,18 @@ public class AppliancesController {
     }
 
     @Operation(summary = "Create a model of PC", description = "Here you can create a model for PC's family has yet created", tags = { "pc" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Model has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products/pcs")
     public ResponseEntity<HttpStatus> addPc(
             @Parameter(description = "Create a new model of PC in the registry", required = true)
             @RequestBody @Valid PcDto pcDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductCreatingExceptionThrow(bindingResult);
         pcService.save(pcDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
@@ -180,15 +201,15 @@ public class AppliancesController {
     @Operation(summary = "Get all the PCs with all the model's filters", tags = { "pc" })
     @GetMapping("/products/pcs")
     public Stream<PcDto> searchAndFilterPcs(
-            @RequestParam(required = false) String modelName,
-            @RequestParam(required = false) String modelSerialNumber,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) String modelSize,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) String modelCategory,
-            @RequestParam(required = false) String modelProcessor,
-            @RequestParam(required = false) Boolean modelAvailability
+            @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
+            @Parameter(description = "The model's serial number for filter", required = false) @RequestParam(required = false) String modelSerialNumber,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's size for filter", required = false) @RequestParam(required = false) String modelSize,
+            @Parameter(description = "The model's min price  for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "The model's category for filter", required = false) @RequestParam(required = false) String modelCategory,
+            @Parameter(description = "The model's processor for filter", required = false) @RequestParam(required = false) String modelProcessor,
+            @Parameter(description = "The model's availability for filter", required = false) @RequestParam(required = false) Boolean modelAvailability
     ) {
         return pcService.getAllPcs()
                 .stream()
@@ -223,13 +244,18 @@ public class AppliancesController {
     }
 
     @Operation(summary = "Create a model of smartphone", description = "Here you can create a model for smartphone's family has yet created", tags = { "smartphone" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Model has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products/smartphones")
     public ResponseEntity<HttpStatus> addSmartphone(
             @Parameter(description = "Create a new model of smartphone in the registry", required = true)
             @RequestBody @Valid SmartphoneDto smartphoneDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductCreatingExceptionThrow(bindingResult);
         smartphoneService.save(smartphoneDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
@@ -238,15 +264,15 @@ public class AppliancesController {
     @Operation(summary = "Get all the smartphones with all the model's filters", tags = { "smartphone" })
     @GetMapping("/products/smartphones")
     public Stream<SmartphoneDto> searchAndFilterSmartphones(
-            @RequestParam(required = false) String modelName,
-            @RequestParam(required = false) String modelSerialNumber,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) String modelSize,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) Integer modelMemory,
-            @RequestParam(required = false) String modelCamera,
-            @RequestParam(required = false) Boolean modelAvailability
+            @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
+            @Parameter(description = "The model's serial number for filter", required = false) @RequestParam(required = false) String modelSerialNumber,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's size for filter", required = false) @RequestParam(required = false) String modelSize,
+            @Parameter(description = "The model's min price  for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "The model's memory for filter", required = false) @RequestParam(required = false) Integer modelMemory,
+            @Parameter(description = "The model's camera for filter", required = false) @RequestParam(required = false) String modelCamera,
+            @Parameter(description = "The model's availability for filter", required = false) @RequestParam(required = false) Boolean modelAvailability
     ) {
         return smartphoneService.getAllSmartphones()
                 .stream()
@@ -281,13 +307,18 @@ public class AppliancesController {
     }
 
     @Operation(summary = "Create a model of TV", description = "Here you can create a model for TV's family has yet created", tags = { "tv" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Model has created"),
+            @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
+            @ApiResponse(responseCode = "500", description = "Not all the necessary fields are present in DTO or has correct values")
+    })
     @PostMapping("/products/tvs")
     public ResponseEntity<HttpStatus> addTv(
             @Parameter(description = "Create a new model of TV in the registry", required = true)
             @RequestBody @Valid TvDto tvDto,
             BindingResult bindingResult
     ) {
-        ErrorCreatingExceptionThrow(bindingResult);
+        ErrorProductCreatingExceptionThrow(bindingResult);
         tvService.save(tvDto);
 
         return ResponseEntity.ok(HttpStatus.OK);
@@ -296,15 +327,15 @@ public class AppliancesController {
     @Operation(summary = "Get all the TVs with all the model's filters", tags = { "tv" })
     @GetMapping("/products/tvs")
     public Stream<TvDto> searchAndFilterTvs(
-            @RequestParam(required = false) String modelName,
-            @RequestParam(required = false) String modelSerialNumber,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) String modelSize,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(required = false) String modelCategory,
-            @RequestParam(required = false) String modelTechnology,
-            @RequestParam(required = false) Boolean modelAvailability
+            @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
+            @Parameter(description = "The model's serial number for filter", required = false) @RequestParam(required = false) String modelSerialNumber,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's size for filter", required = false) @RequestParam(required = false) String modelSize,
+            @Parameter(description = "The model's min price  for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice,
+            @Parameter(description = "The model's category for filter", required = false) @RequestParam(required = false) String modelCategory,
+            @Parameter(description = "The model's technology for filter", required = false) @RequestParam(required = false) String modelTechnology,
+            @Parameter(description = "The model's availability for filter", required = false) @RequestParam(required = false) Boolean modelAvailability
     ) {
         return tvService.getAllTvs()
                 .stream()
@@ -340,7 +371,9 @@ public class AppliancesController {
 
     @Operation(summary = "Get all the models in DB with possibility to sorting by alphabet in both directions", tags = { "product" })
     @GetMapping("/products/byAlphabet")
-    public Stream<ProductDto> getAllProductsWithSortingByAlphabet(@RequestParam String direction) {
+    public Stream<ProductDto> getAllProductsWithSortingByAlphabet(
+            @Parameter(description = "The direction for sorting by alphabet: ASC or DESC", required = true)
+            @RequestParam String direction) {
         return productService.getAllProductsWithSortingByAlphabet(direction)
                 .stream()
                 .map(this::convertToProductDTO);
@@ -348,7 +381,9 @@ public class AppliancesController {
 
     @Operation(summary = "Get all the models in DB with possibility to sorting by price in both directions", tags = { "product" })
     @GetMapping("/products/byPrice")
-    public Stream<ProductDto> getAllProductsWithSortingByPrice(@RequestParam String direction) {
+    public Stream<ProductDto> getAllProductsWithSortingByPrice(
+            @Parameter(description = "The direction for sorting by price: ASC or DESC", required = true)
+            @RequestParam String direction) {
         return productService.getAllProductsWithSortingByPrice(direction)
                 .stream()
                 .map(this::convertToProductDTO);
@@ -357,11 +392,11 @@ public class AppliancesController {
     @Operation(summary = "Get all the products by its name (family + model as example) with possibility to use the following filters: product type, color and price(from...to...)", tags = { "product" })
     @GetMapping("/products/search")
     public Stream<ProductDto> searchAndFilterProducts(
-            @RequestParam(required = false) String searchValue,
-            @RequestParam(required = false) String productType,
-            @RequestParam(required = false) String modelColor,
-            @RequestParam(required = false) BigDecimal minPrice,
-            @RequestParam(required = false) BigDecimal maxPrice
+            @Parameter(description = "Name for searching that can contain both of family and model name for filter", required = true) @RequestParam String searchValue,
+            @Parameter(description = "The product's type for filter", required = false) @RequestParam(required = false) String productType,
+            @Parameter(description = "The model's color for filter", required = false) @RequestParam(required = false) String modelColor,
+            @Parameter(description = "The model's min price for filter", required = false) @RequestParam(required = false) BigDecimal minPrice,
+            @Parameter(description = "The model's max price for filter", required = false) @RequestParam(required = false) BigDecimal maxPrice
     ) {
         return productService.getProductsByModelNameOrFamilyName(searchValue)
                 .stream()
@@ -413,18 +448,12 @@ public class AppliancesController {
     }
 
     @ExceptionHandler
-    private ResponseEntity<ApplianceErrorResponse> handleException(ProductNotFoundException e) {
-        ApplianceErrorResponse response = new ApplianceErrorResponse("Product not found!", System.currentTimeMillis());
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
     private ResponseEntity<ApplianceErrorResponse> handleException(ProductNotCreatedException e) {
         ApplianceErrorResponse response = new ApplianceErrorResponse(e.getMessage(), System.currentTimeMillis());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    private void ErrorCreatingExceptionThrow(BindingResult bindingResult) {
+    private void ErrorProductCreatingExceptionThrow(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             StringBuilder errorMessage = new StringBuilder();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -435,6 +464,20 @@ public class AppliancesController {
                         .append(" ; ");
             }
             throw new ProductNotCreatedException(errorMessage.toString());
+        }
+    }
+
+    private void ErrorProductFamilyCreatingExceptionThrow(BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMessage = new StringBuilder();
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMessage.append(error.getField())
+                        .append(" - ")
+                        .append(error.getDefaultMessage())
+                        .append(" ; ");
+            }
+            throw new ProductFamilyNotCreatedException(errorMessage.toString());
         }
     }
 }

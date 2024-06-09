@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -32,15 +33,15 @@ public class ProductFamily {
     @Column(name = "company_manufacturer")
     private String companyManufacturer;
 
-    @NotEmpty(message = "Possibility to buy online should not be empty")
+    @NotNull(message = "Possibility to buy online should not be empty")
     @Column(name = "buy_online")
     private Boolean isAbleToBuyOnline;
 
-    @NotEmpty(message = "Installment payment possibility should not be empty")
+    @NotNull(message = "Installment payment possibility should not be empty")
     @Column(name = "installment")
     private Boolean isAbleToInstallment;
 
-    @NotEmpty(message = "Product type should not be empty")
+    @NotNull(message = "Product type should not be empty")
     @Column(name = "product_type")
     private String productType;
 

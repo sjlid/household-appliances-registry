@@ -22,4 +22,6 @@ public class ProductFamilyResponseDto {
     private Boolean isAbleToInstallment;
     @Schema(description = "Type of product")
     private String productType;
+    @Schema(description = "Counter of available models in this product family: it's increasing, when you add a new model")
+    private Integer availableProducts;
 }
