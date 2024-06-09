@@ -1,6 +1,8 @@
 Swagger page with docs:
 http://localhost:8080/swagger-ui/index.html
 
+DB settings for application.properties:
+spring.datasource.url=jdbc:postgresql://localhost:5432/registry
 
 
 Предусловие:
