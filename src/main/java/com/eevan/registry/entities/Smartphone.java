@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -21,4 +23,18 @@ public class Smartphone extends Product {
     @NotEmpty(message = "Model's memory should not be empty")
     @Column(name = "model_camera")
     private String modelCamera;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Smartphone other = (Smartphone) obj;
+        return Objects.equals(modelMemory, other.modelMemory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), modelMemory);
+    }
 }

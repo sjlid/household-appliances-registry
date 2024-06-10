@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -21,4 +23,18 @@ public class Tv extends Product {
     @NotEmpty(message = "Model's technology should not be empty")
     @Column(name = "model_technology")
     private String modelTechnology;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Tv other = (Tv) obj;
+        return Objects.equals(modelTechnology, other.modelTechnology);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), modelTechnology);
+    }
 }

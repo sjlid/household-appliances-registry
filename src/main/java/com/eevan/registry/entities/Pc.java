@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +21,18 @@ public class Pc extends Product {
     @NotEmpty(message = "Model's processor should not be empty")
     @Column(name = "model_processor")
     private String modelProcessor;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Pc other = (Pc) obj;
+        return Objects.equals(modelCategory, other.modelCategory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), modelCategory);
+    }
 }

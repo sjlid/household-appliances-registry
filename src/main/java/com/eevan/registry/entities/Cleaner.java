@@ -5,6 +5,9 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.*;
 
+import java.util.Objects;
+
+
 @Entity
 @Getter
 @Setter
@@ -19,4 +22,18 @@ public class Cleaner extends Product {
     @NotEmpty(message = "Model's work modes should not be empty")
     @Column(name = "model_modes")
     private String modelWorkModes;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Cleaner other = (Cleaner) obj;
+        return Objects.equals(modelVolume, other.modelVolume);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), modelVolume);
+    }
 }

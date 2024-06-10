@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -21,4 +23,18 @@ public class Fridge extends Product {
     @NotEmpty(message = "Model's compressor should not be empty")
     @Column(name = "model_compressor")
     private String modelCompressor;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!super.equals(obj)) {
+            return false;
+        }
+        Fridge other = (Fridge) obj;
+        return Objects.equals(modelDoors, other.modelDoors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), modelDoors);
+    }
 }

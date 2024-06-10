@@ -1,6 +1,7 @@
 package com.eevan.registry.entities;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,8 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @Table(name = "product_family", indexes = @Index(columnList = "family_name"))
 public class ProductFamily {
