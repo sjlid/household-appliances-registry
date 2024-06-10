@@ -1,8 +1,10 @@
-Swagger page with docs:
+Страница Swagger с документацией:
 http://localhost:8080/swagger-ui/index.html
 
-DB settings for application.properties:
+Настройки БД для подключения в application.properties (по факту все настройки там уже прописаны):
 spring.datasource.url=jdbc:postgresql://localhost:5432/registry
+
+Все необходимые таблицы создадутся автоматически при первом запуске приложения.
 
 
 Предусловие:
