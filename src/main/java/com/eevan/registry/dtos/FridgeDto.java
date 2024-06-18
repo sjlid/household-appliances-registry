@@ -12,7 +12,10 @@ import java.math.BigDecimal;
 @Setter
 public class FridgeDto extends ProductDto {
     @Schema(description = "Quantity of doors")
+    @NotEmpty(message = "Model's doors should not be empty")
     private Integer modelDoors;
+
     @Schema(description = "Type of compressor")
+    @NotEmpty(message = "Model's compressor should not be empty")
     private String modelCompressor;
 }

@@ -5,7 +5,6 @@ import com.eevan.registry.entities.*;
 import com.eevan.registry.services.*;
 import com.eevan.registry.utils.ApplianceErrorResponse;
 import com.eevan.registry.utils.ProductFamilyNotCreatedException;
-import com.eevan.registry.utils.ProductFamilyNotFoundException;
 import com.eevan.registry.utils.ProductNotCreatedException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

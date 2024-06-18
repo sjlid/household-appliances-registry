@@ -12,7 +12,10 @@ import java.math.BigDecimal;
 @Setter
 public class CleanerDto extends ProductDto {
     @Schema(description = "Cleaner's volume")
+    @NotEmpty(message = "Volume's work modes should not be empty")
     private Float modelVolume;
+
     @Schema(description = "Cleaner's work modes")
+    @NotEmpty(message = "Model's work modes should not be empty")
     private String modelWorkModes;
 }
