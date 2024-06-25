@@ -37,7 +37,7 @@ public class AppliancesController {
     private final ProductFamilyService productFamilyService;
     private final ModelMapper modelMapper;
 
-    @Operation(summary = "Create product family", description = "Here you can create a family of different types of product", tags = { "product" })
+    @Operation(summary = "Create product family", description = "Here you can create a family of different types of product", tags = {"product"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Product family has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -53,7 +53,7 @@ public class AppliancesController {
         return convertToProductFamilyResponseDto(productFamilyService.save(createdProductFamily));
     }
 
-    @Operation(summary = "Create a model of cleaner", description = "Here you can create a model for cleaner's family has yet created", tags = { "cleaner" })
+    @Operation(summary = "Create a model of cleaner", description = "Here you can create a model for cleaner's family has yet created", tags = {"cleaner"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Model has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -71,7 +71,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all the cleaners with all the model's filters", tags = { "cleaner" })
+    @Operation(summary = "Get all the cleaners with all the model's filters", tags = {"cleaner"})
     @GetMapping("/products/cleaners")
     public Stream<CleanerDto> searchAndFilterCleaners(
             @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
@@ -116,7 +116,7 @@ public class AppliancesController {
                 .map(this::convertToCleanerDto);
     }
 
-    @Operation(summary = "Create a model of fridge", description = "Here you can create a model for fridge's family has yet created", tags = { "fridge" })
+    @Operation(summary = "Create a model of fridge", description = "Here you can create a model for fridge's family has yet created", tags = {"fridge"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Model has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -134,7 +134,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all the fridges with all the model's filters", tags = { "fridge" })
+    @Operation(summary = "Get all the fridges with all the model's filters", tags = {"fridge"})
     @GetMapping("/products/fridges")
     public Stream<FridgeDto> searchAndFilterFridges(
             @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
@@ -179,7 +179,7 @@ public class AppliancesController {
                 .map(this::convertToFridgeDto);
     }
 
-    @Operation(summary = "Create a model of PC", description = "Here you can create a model for PC's family has yet created", tags = { "pc" })
+    @Operation(summary = "Create a model of PC", description = "Here you can create a model for PC's family has yet created", tags = {"pc"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Model has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -197,7 +197,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all the PCs with all the model's filters", tags = { "pc" })
+    @Operation(summary = "Get all the PCs with all the model's filters", tags = {"pc"})
     @GetMapping("/products/pcs")
     public Stream<PcDto> searchAndFilterPcs(
             @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
@@ -242,7 +242,7 @@ public class AppliancesController {
                 .map(this::convertToPcDto);
     }
 
-    @Operation(summary = "Create a model of smartphone", description = "Here you can create a model for smartphone's family has yet created", tags = { "smartphone" })
+    @Operation(summary = "Create a model of smartphone", description = "Here you can create a model for smartphone's family has yet created", tags = {"smartphone"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Model has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -260,7 +260,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all the smartphones with all the model's filters", tags = { "smartphone" })
+    @Operation(summary = "Get all the smartphones with all the model's filters", tags = {"smartphone"})
     @GetMapping("/products/smartphones")
     public Stream<SmartphoneDto> searchAndFilterSmartphones(
             @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
@@ -305,7 +305,7 @@ public class AppliancesController {
                 .map(this::convertToSmartphoneDto);
     }
 
-    @Operation(summary = "Create a model of TV", description = "Here you can create a model for TV's family has yet created", tags = { "tv" })
+    @Operation(summary = "Create a model of TV", description = "Here you can create a model for TV's family has yet created", tags = {"tv"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Model has created"),
             @ApiResponse(responseCode = "400", description = "Not all the necessary fields are filled"),
@@ -323,7 +323,7 @@ public class AppliancesController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all the TVs with all the model's filters", tags = { "tv" })
+    @Operation(summary = "Get all the TVs with all the model's filters", tags = {"tv"})
     @GetMapping("/products/tvs")
     public Stream<TvDto> searchAndFilterTvs(
             @Parameter(description = "The model name for filter", required = false) @RequestParam(required = false) String modelName,
@@ -368,7 +368,7 @@ public class AppliancesController {
                 .map(this::convertToTvDto);
     }
 
-    @Operation(summary = "Get all the models in DB with possibility to sorting by alphabet in both directions", tags = { "product" })
+    @Operation(summary = "Get all the models in DB with possibility to sorting by alphabet in both directions", tags = {"product"})
     @GetMapping("/products/byAlphabet")
     public Stream<ProductDto> getAllProductsWithSortingByAlphabet(
             @Parameter(description = "The direction for sorting by alphabet: ASC or DESC", required = true)
@@ -378,7 +378,7 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
-    @Operation(summary = "Get all the models in DB with possibility to sorting by price in both directions", tags = { "product" })
+    @Operation(summary = "Get all the models in DB with possibility to sorting by price in both directions", tags = {"product"})
     @GetMapping("/products/byPrice")
     public Stream<ProductDto> getAllProductsWithSortingByPrice(
             @Parameter(description = "The direction for sorting by price: ASC or DESC", required = true)
@@ -388,7 +388,7 @@ public class AppliancesController {
                 .map(this::convertToProductDTO);
     }
 
-    @Operation(summary = "Get all the products by its name (family + model as example) with possibility to use the following filters: product type, color and price(from...to...)", tags = { "product" })
+    @Operation(summary = "Get all the products by its name (family + model as example) with possibility to use the following filters: product type, color and price(from...to...)", tags = {"product"})
     @GetMapping("/products/search")
     public Stream<ProductDto> searchAndFilterProducts(
             @Parameter(description = "Name for searching that can contain both of family and model name for filter", required = true) @RequestParam String searchValue,
