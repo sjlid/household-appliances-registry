@@ -1,0 +1,4 @@
+CREATE TABLE product_family (
+    id long primary key,
+
+);
