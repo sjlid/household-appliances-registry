@@ -1,4 +1,10 @@
 CREATE TABLE product_family (
-    id long primary key,
-
+    'id' long NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    'company_manufacturer' varchar(30) NOT NULL,
+    'country_manufacturer' varchar(30) NOT NULL,
+    'family_name' varchar(30) NOT NULL,
+    'buy_online' NOT NULL,
+    'installment' NOT NULL,
+    'product_type' varchar(30) NOT NULL,
+    'models_available' int
 );
