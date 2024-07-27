@@ -10,14 +10,11 @@ http://localhost:8080/swagger-ui/index.html
 Настройки БД для подключения в application.properties (по факту все настройки там уже прописаны):
 spring.datasource.url=jdbc:postgresql://localhost:5432/registry
 
-Все необходимые таблицы создадутся автоматически при первом запуске приложения.
+Все необходимые таблицы и немного записей создадутся автоматом за счет Flyway.
 
 
-Предусловие:
-- Java 8
-- Spring Boot Starter, Spring Web, Spring JPA, Spring Hibernate
-- Postgres SQL
-- springdoc-openapi
+Стек:
+- Java 17, Spring Boot, Spring Web, Spring JPA, Flyway, Postgres SQL, Swagger
 
 
 Ход работ:
