@@ -1,11 +1,11 @@
 package com.eevan.registry.dtos;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Schema(description = "Common family product DTO")
 @Getter

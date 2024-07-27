@@ -1,15 +1,12 @@
 package com.eevan.registry.entities;
 
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.util.List;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Data

@@ -1,10 +1,8 @@
 package com.eevan.registry.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-
 import java.math.BigDecimal;
 
 @Entity
