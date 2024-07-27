@@ -10,7 +10,7 @@ http://localhost:8080/swagger-ui/index.html
 Настройки БД для подключения в application.properties (по факту все настройки там уже прописаны):
 spring.datasource.url=jdbc:postgresql://localhost:5432/registry
 
-Все необходимые таблицы и немного записей создадутся автоматом за счет Flyway.
+Flyway создаст нужные таблицы и записи в них.
 
 
 Стек:
