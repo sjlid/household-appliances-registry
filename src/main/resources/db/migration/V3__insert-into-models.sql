@@ -1,0 +1,25 @@
+INSERT INTO products (
+    id, family_id, product_type, model_available, model_color, model_name,
+    model_price, model_serial, model_size, model_volume, model_modes, model_compressor,
+    model_doors, model_category, model_processor, model_camera, model_memory, model_technology, type
+)
+VALUES (1, 1, 'TV', true, 'red', 'Screen', 10000,'43ff43f', '300x200', null, null, null, null, 'Office', null, null, null, 'SuperWide', 'TV'),
+    (2, 1, 'TV', false, 'green', 'View X', 20400,'43ff432214243f', '400x500', null, null, null, null, 'Home', null, null, null, 'ExtraWide', 'TV'),
+    (3, 6, 'TV', true, 'blue', 'View XXX', 13000,'43fffdsf43f', '800x900', null, null, null, null, 'Office', null, null, null, 'HD', 'TV'),
+    (4, 6, 'TV', false, 'white', 'Window', 50430,'43fcvvf43f', '1000x1200', null, null, null, null, 'Home', null, null, null, 'WHD', 'TV'),
+    (5, 2, 'CLEANER', true, 'red', 'Flow', 20000,'43ff3rf43f', '30x200', 5, '3', null, null, null, null, null, null, null, 'CLEANER'),
+    (6, 7, 'CLEANER', true, 'green', 'Air Flow', 23000,'43ffgvx43f', '30x20', 5, '3', null, null, null, null, null, null, null, 'CLEANER'),
+    (7, 2, 'CLEANER', false, 'blue', 'Windy', 10300,'43f34r5tf3f43f', '300x20', 5, '2', null, null, null, null, null, null, null, 'CLEANER'),
+    (8, 7, 'CLEANER', false, 'white', 'Windycool', 12000,'43ffvdfs43f', '100x20', 5, '4', null, null, null, null, null, null, null, 'CLEANER'),
+    (9, 3, 'PC', true, 'red', 'Max', 120000,'4dfvc3ff43f', '500x500', null, null, null, null, 'Gaming', 'Razor 5', null, null, null, 'PC'),
+    (10, 8, 'PC', true, 'green', 'UltraMax', 180000,'43fr324f43f', '600x200', null, null, null, null, 'Home', 'Intol 3', null, null, null, 'PC'),
+    (11, 3, 'PC', false, 'blue', 'GamerPro', 210000,'43ff4vsd3f', '700x200', null, null, null, null, 'Office', 'Intol 2', null, null, null, 'PC'),
+    (12, 8, 'PC', false, 'white', 'WorkLoad', 310000,'43cxff43f', '300x700', null, null, null, null, 'Gaming', 'Razor 7', null, null, null, 'PC'),
+    (13, 4, 'FRIDGE', true, 'red', 'Cooler', 10000,'43ffr32443f', '300x900', null, null, 'Extra cool', 2, null, null, null, null, null, 'FRIDGE'),
+    (14, 9, 'FRIDGE', true, 'green', 'IcyWind', 18000,'43fdsf43f', '900x200', null, null, 'Extra freeze', 1, null, null, null, null, null, 'FRIDGE'),
+    (15, 4, 'FRIDGE', false, 'blue', 'Freeze Pro', 16500,'43fbgvf43f', '400x200', null, null, 'CoolSnow', 2, null, null, null, null, null, 'FRIDGE'),
+    (16, 9, 'FRIDGE', false, 'red', 'Snowflakes', 10800,'43ff34vc43f', '300x400', null, null, 'CoolSnow', 2, null, null, null, null, null, 'FRIDGE'),
+    (17, 5, 'SMARTPHONE', true, 'green', 'Sun', 10000,'43ff4bfda3f', '350x260', null, null, null, null, null, null, 'Carl Xeis', 256, null, 'SMARTPHONE'),
+    (18, 10, 'SMARTPHONE', true, 'blue', 'Galactic', 20000,'43ff4fgdfv43f', '390x300', null, null, null, null, null, null, 'Carl Zeix', 128, null, 'SMARTPHONE'),
+    (19, 5, 'SMARTPHONE', false, 'white', 'PhoneMax', 30000,'43123123ff43f', '3500x2500', null, null, null, null, null, null, 'Leika', 64, null, 'SMARTPHONE'),
+    (20, 10, 'SMARTPHONE', false, 'red', 'Moto', 40000,'43ffvdsxcc43f', '3600x2600', null, null, null, null, null, null, 'Leika', 128, null, 'SMARTPHONE')
