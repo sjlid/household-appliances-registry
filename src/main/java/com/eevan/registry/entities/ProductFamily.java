@@ -3,13 +3,17 @@ package com.eevan.registry.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
+@Builder
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "product_family", indexes = @Index(columnList = "family_name"))
 public class ProductFamily {
