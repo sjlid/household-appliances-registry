@@ -23,7 +23,7 @@ public class TvService {
     @Transactional
     public void save(TvDto tvDto) {
         ProductFamily productFamily = productFamilyRepository.getFamilyById(tvDto.getProductFamilyId());
-        Tv tv = convertToPc(tvDto);
+        Tv tv = convertToTv(tvDto);
         tv.setProductFamily(productFamily);
         if (tv.getModelAvailability()) {
             int totalModels = productFamily.getAvailableProducts() + 1;
@@ -38,7 +38,7 @@ public class TvService {
         return tvRepository.findAll();
     }
 
-    private Tv convertToPc(TvDto tvDto) {
+    private Tv convertToTv(TvDto tvDto) {
         Tv tv = new Tv();
         tv.setModelName(tvDto.getModelName());
         tv.setModelSerialNumber(tvDto.getModelSerialNumber());
