@@ -1,5 +1,7 @@
 package com.eevan.registry.util;
 
+import com.eevan.registry.entities.Cleaner;
+import com.eevan.registry.entities.Product;
 import com.eevan.registry.entities.ProductFamily;
 
 public class DataUtils {
@@ -28,6 +30,4 @@ public class DataUtils {
                 .productType("FRIDGE")
                 .build();
     }
-
-
 }
