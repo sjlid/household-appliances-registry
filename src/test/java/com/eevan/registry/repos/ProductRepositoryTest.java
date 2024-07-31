@@ -4,12 +4,14 @@ import com.eevan.registry.entities.Cleaner;
 import com.eevan.registry.entities.Product;
 import com.eevan.registry.entities.ProductFamily;
 import com.eevan.registry.util.DataUtils;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.math.BigDecimal;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -23,7 +25,8 @@ class ProductRepositoryTest {
 
     @BeforeEach
     public void setUp() {
-
+        productRepository.deleteAll();
+        productFamilyRepository.deleteAll();
     }
 
     @Test
@@ -31,19 +34,24 @@ class ProductRepositoryTest {
         //given
         ProductFamily productFamilyToSave = DataUtils.getProductFamilyTransient();
         ProductFamily savedProductFamily = productFamilyRepository.save(productFamilyToSave);
-
+        Product productToAdd = Cleaner.builder()
+                .modelWorkModes("3")
+                .modelVolume(4.5f)
+                .productFamily(savedProductFamily)
+                .productType("CLEANER")
+                .modelName("AirMax")
+                .modelSerialNumber("1q2w3e")
+                .modelColor("Red")
+                .modelSize("100x100")
+                .modelPrice(BigDecimal.valueOf(15600))
+                .modelAvailability(true)
+                .build();
 
         //when
-
+        Product savedProductCleaner = productRepository.save(productToAdd);
 
         //then
-    }
-
-    @Test
-    public void getByModelNameAllIgnoreCaseContaining() {
-    }
-
-    @Test
-    public void getProductsByName() {
+        assertThat(savedProductCleaner).isNotNull();
+        assertThat(savedProductCleaner.getId()).isNotNull();
     }
 }

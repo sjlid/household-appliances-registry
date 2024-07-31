@@ -5,12 +5,14 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
 @Entity
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @Getter
 @Setter
 @NoArgsConstructor
